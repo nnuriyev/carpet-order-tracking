@@ -9,17 +9,24 @@
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         {{--<img src="{{asset('admin-assets/images/img.jpg')}}" alt="">--}}
-                        {{auth()->guard('admin')->user()->name. ' ' .auth()->guard('admin')->user()->surname}}
+                        {{Auth::user()->name}}
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right" style="width: 120px">
-                        <li><a href="{{route('admin.logout')}}"><i class="fa fa-sign-out pull-right"></i> Çıxış</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out pull-right"></i> Çıxış
+                            </a>
+                        </li>
                     </ul>
                 </li>
-
-
-
             </ul>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+
         </nav>
     </div>
 </div>

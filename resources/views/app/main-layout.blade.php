@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Nurlan Nuriyev - linkedin.com/in/nurlannuriyev - github.com/nnuriyev">
     <title>Order Tracking System</title>
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
     @yield('page-styles')
 
 </head>

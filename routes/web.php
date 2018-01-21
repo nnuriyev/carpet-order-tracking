@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('app/pages.login.login');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

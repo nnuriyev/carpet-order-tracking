@@ -2,6 +2,13 @@
 
 return [
 
+    'default_roles' => [
+        'admin' => 'Admin',
+        'sales' => 'Satış',
+        'workshop' => 'Emalatxana'
+        //'partner' => 'Əməkdaş',
+    ],
+
     'models' => [
 
         /*

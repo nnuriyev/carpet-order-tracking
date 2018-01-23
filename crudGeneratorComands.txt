@@ -1,0 +1,4 @@
+php artisan crud:controller UserController --crud-name=user --model-name=User --view-path="app/pages"
+php artisan crud:view user --fields="name#string; email#email; password#password" --view-path="app/pages"
+===========
+

@@ -4,9 +4,11 @@
             <li>
                 <a href="#"><i class="fa fa-home"></i> Əsas səhifə</a>
             </li>
+            @role('admin')
             <li>
-                <a href="#"><i class="fa fa-user"></i> İstifadəçilər</a>
+                <a href="{{route('user.index')}}"><i class="fa fa-user"></i> İstifadəçilər</a>
             </li>
+            @endrole
             <li>
                 <a href="#"><i class="fa fa-edit"></i> Kontentlər</a>
             </li>

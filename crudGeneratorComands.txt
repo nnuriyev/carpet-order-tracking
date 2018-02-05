@@ -2,3 +2,7 @@ php artisan crud:controller UserController --crud-name=user --model-name=User --
 php artisan crud:view user --fields="name#string; email#email; password#password" --view-path="app/pages"
 ===========
 
+php artisan crud:controller ProductCategoryController --crud-name=productCategory --model-name=ProductCategory --view-path="app/pages"
+php artisan crud:view productCategory --fields="name#string; key#string" --view-path="app/pages"
+===========
+

@@ -4,9 +4,11 @@
             <li>
                 <a href="{{route('home')}}"><i class="fa fa-home"></i> Əsas səhifə</a>
             </li>
+            @role('admin')
             <li>
                 <a href="{{route('user.index')}}"><i class="fa fa-user"></i> İstifadəçilər</a>
             </li>
+            @endrole
             <li>
                 <a href="{{route('product-category.index')}}"><i class="fa fa-edit"></i> Məhsul kateqoriyaları</a>
             </li>

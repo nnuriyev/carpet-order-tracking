@@ -48,10 +48,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        User::create($requestData);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $user->assignRole($request->role);
 
         return redirect('user')->with('flash_message', 'User added!');
     }
@@ -94,11 +96,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-        
+
+
         $user = User::findOrFail($id);
-        $user->update($requestData);
+        
+        if (trim($request->password) != null) {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+
+            $user->save();
+        } else {
+            $user->update($request->except('password'));
+        }
+    
 
         return redirect('user')->with('flash_message', 'User updated!');
     }

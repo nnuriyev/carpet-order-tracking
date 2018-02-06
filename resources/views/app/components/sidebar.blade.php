@@ -10,6 +10,9 @@
             </li>
             @endrole
             <li>
+                <a href="{{route('product.index')}}"><i class="fa fa-cubes"></i> Məhsular</a>
+            </li>
+            <li>
                 <a href="{{route('product-category.index')}}"><i class="fa fa-edit"></i> Məhsul kateqoriyaları</a>
             </li>
         </ul>

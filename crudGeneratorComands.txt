@@ -6,3 +6,7 @@ php artisan crud:controller ProductCategoryController --crud-name=productCategor
 php artisan crud:view productCategory --fields="name#string; key#string" --view-path="app/pages"
 ===========
 
+php artisan crud:controller ProductController --crud-name=product --model-name=Product --view-path="app/pages"
+php artisan crud:view product --fields="category_id#select#options=1,2; code#string; name#string; price#string; cost#string" --view-path="app/pages"
+===========
+

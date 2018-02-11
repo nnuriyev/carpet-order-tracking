@@ -10,3 +10,8 @@ php artisan crud:controller ProductController --crud-name=product --model-name=P
 php artisan crud:view product --fields="category_id#select#options=1,2; code#string; name#string; price#string; cost#string" --view-path="app/pages"
 ===========
 
+
+php artisan crud:controller CustomerController --crud-name=customer --model-name=Customer --view-path="app/pages"
+php artisan crud:view customer --fields="full_name#string; email#string; phone#string; birth_date#date; gender#select#options=men,women; type#select#options=VIP,Standart; status#select#options=VIP,Standart; note#text" --view-path="app/pages"
+===========
+

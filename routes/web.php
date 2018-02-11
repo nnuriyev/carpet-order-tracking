@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('user', 'UserController');
     Route::resource('product-category', 'ProductCategoryController');
     Route::resource('product', 'ProductController');
+    Route::resource('customer', 'CustomerController');
 
     Route::get('/test', function (){
         $user = Auth::user();

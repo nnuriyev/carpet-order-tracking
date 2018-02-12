@@ -15,3 +15,6 @@ php artisan crud:controller CustomerController --crud-name=customer --model-name
 php artisan crud:view customer --fields="full_name#string; email#string; phone#string; birth_date#date; gender#select#options=men,women; type#select#options=VIP,Standart; status#select#options=VIP,Standart; note#text" --view-path="app/pages"
 ===========
 
+php artisan crud:controller OrderController --crud-name=order --model-name=Order --view-path="app/pages"
+php artisan crud:view order --fields="full_name#string; email#string; phone#string; birth_date#date; gender#select#options=men,women; type#select#options=VIP,Standart; status#select#options=VIP,Standart; note#text" --view-path="app/pages"
+===========

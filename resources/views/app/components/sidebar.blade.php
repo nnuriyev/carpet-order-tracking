@@ -15,7 +15,10 @@
                 <a href="{{route('product-category.index')}}"><i class="fa fa-edit"></i> Məhsul kateqoriyaları</a>
             </li>
             <li>
-                <a href="{{route('customer.index')}}"><i class="fa fa-user"></i> Müştərilər</a>
+                <a href="{{route('customer.index')}}"><i class="fa fa-users"></i> Müştərilər</a>
+            </li>
+            <li>
+                <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i> Sifarişlər</a>
             </li>
             @endrole
         </ul>

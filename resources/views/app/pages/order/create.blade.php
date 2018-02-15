@@ -32,3 +32,11 @@
         </div>
     </div>
 @endsection
+
+@section('page-scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".js-example-basic-single").select2();
+        });
+    </script>
+@endsection

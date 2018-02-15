@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'gender' => [
         1 => 'Kişi', 
         0 => 'Qadın'
@@ -15,6 +16,12 @@ return [
     'customerType' => [
         0 => 'VIP', 
         1 => 'Standart',
-    ]
+    ],
+
+    'orderStatus' => [
+        0 => 'Təsdiq olunmayıb',
+        1 => 'Təsdiq olunub',
+        2 => 'Sifariş tamamlanıb'
+    ],
 
 ];

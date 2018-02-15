@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Order;
+use App\Product;
+use App\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -36,7 +41,49 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('app/pages.order.create');
+        $customers = Customer::all();
+        $customerList = new Collection();
+        $customers->each(function ($item, $key) use ($customerList) {
+            $customerList->push([
+                'id' => $item->id,
+                'name' => $item->full_name . ' - ' . $item->phone
+            ]);
+        });
+        $customerList = $customerList->pluck('name', 'id');
+
+        $products = Product::all();
+        $productList = new Collection();
+        $products->each(function ($item, $key) use ($productList) {
+            $productList->push([
+                'id' => $item->id,
+                'name' => $item->category->name . ' - ' . $item->code . ' - ' . $item->name . ' - ' . $item->price
+            ]);
+        });
+        $productList = $productList->pluck('name', 'id');
+
+        $frames = ProductCategory::where('key', 'cherchive')->first()->products;
+        $frameList = new Collection();
+        $frames->each(function ($item, $key) use ($frameList) {
+            $frameList->push([
+                'id' => $item->id,
+                'name' =>$item->code . ' - ' . $item->name . ' - ' . $item->price
+            ]);
+        });
+        $frameList = $frameList->pluck('name', 'id');
+
+        $cases = ProductCategory::where('key', 'chanta')->first()->products;
+        $casesList = new Collection();
+        $cases->each(function ($item, $key) use ($casesList) {
+            $casesList->push([
+                'id' => $item->id,
+                'name' =>$item->code . ' - ' . $item->name . ' - ' . $item->price
+            ]);
+        });
+        $casesList = $casesList->pluck('name', 'id');
+
+        return view('app/pages.order.create',
+            compact('customerList', 'productList',
+                'frameList', 'casesList'));
     }
 
     /**
@@ -48,9 +95,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        
         $requestData = $request->all();
-        
+        $requestData['user_id'] = Auth::user()->id;
+
         Order::create($requestData);
 
         return redirect('order')->with('flash_message', 'Order added!');

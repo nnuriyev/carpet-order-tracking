@@ -25,7 +25,38 @@
                                     <tr>
                                         <th>ID</th><td>{{ $order->id }}</td>
                                     </tr>
-                                    <tr><th> Customer Id </th><td> {{ $order->customer_id }} </td></tr><tr><th> Product Id </th><td> {{ $order->product_id }} </td></tr><tr><th> Frame Id </th><td> {{ $order->frame_id }} </td></tr>
+                                    <tr>
+                                        <th> Customer</th>
+                                        <td> {{ $order->customer->full_name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Product</th>
+                                        <td> {{ $order->product->code . ' - ' . $order->product->name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Frame</th>
+                                        <td> {{ $order->frame->code . ' - ' . $order->frame->name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Case</th>
+                                        <td> {{ $order->case->code . ' - ' . $order->case->name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Price</th>
+                                        <td> {{ $order->price }} AZN</td>
+                                    </tr>
+                                    <tr>
+                                        <th> Paid amount</th>
+                                        <td> {{ $order->paid_amount }} AZN</td>
+                                    </tr>
+                                    <tr>
+                                        <th> Discount amount</th>
+                                        <td> {{ $order->discount_amount }} AZN</td>
+                                    </tr>
+                                    <tr>
+                                        <th> Status</th>
+                                        <td> {{ config('staticData')['orderStatus'][$order->status] }} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

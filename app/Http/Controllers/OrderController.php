@@ -98,6 +98,12 @@ class OrderController extends Controller
         $requestData = $request->all();
         $requestData['user_id'] = Auth::user()->id;
 
+        $productPrice = Product::findOrFail($request->product_id)->price;
+        $framePrace = $request->has('frame_id') ? Product::findOrFail($request->frame_id)->price : 0;
+        $casePrace = $request->has('case_id') ? Product::findOrFail($request->case_id)->price : 0;
+
+        $requestData['price'] = $productPrice + $framePrace + $casePrace;
+
         Order::create($requestData);
 
         return redirect('order')->with('flash_message', 'Order added!');
@@ -128,7 +134,49 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        return view('app/pages.order.edit', compact('order'));
+        $customers = Customer::all();
+        $customerList = new Collection();
+        $customers->each(function ($item, $key) use ($customerList) {
+            $customerList->push([
+                'id' => $item->id,
+                'name' => $item->full_name . ' - ' . $item->phone
+            ]);
+        });
+        $customerList = $customerList->pluck('name', 'id');
+
+        $products = Product::all();
+        $productList = new Collection();
+        $products->each(function ($item, $key) use ($productList) {
+            $productList->push([
+                'id' => $item->id,
+                'name' => $item->category->name . ' - ' . $item->code . ' - ' . $item->name . ' - ' . $item->price
+            ]);
+        });
+        $productList = $productList->pluck('name', 'id');
+
+        $frames = ProductCategory::where('key', 'cherchive')->first()->products;
+        $frameList = new Collection();
+        $frames->each(function ($item, $key) use ($frameList) {
+            $frameList->push([
+                'id' => $item->id,
+                'name' =>$item->code . ' - ' . $item->name . ' - ' . $item->price
+            ]);
+        });
+        $frameList = $frameList->pluck('name', 'id');
+
+        $cases = ProductCategory::where('key', 'chanta')->first()->products;
+        $casesList = new Collection();
+        $cases->each(function ($item, $key) use ($casesList) {
+            $casesList->push([
+                'id' => $item->id,
+                'name' =>$item->code . ' - ' . $item->name . ' - ' . $item->price
+            ]);
+        });
+        $casesList = $casesList->pluck('name', 'id');
+
+        return view('app/pages.order.edit', compact('order',
+            'customerList', 'productList',
+            'frameList', 'casesList'));
     }
 
     /**
@@ -141,10 +189,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $requestData = $request->all();
-        
         $order = Order::findOrFail($id);
+
+        $productPrice = Product::findOrFail($request->product_id)->price;
+        $framePrace = $request->has('frame_id') ? Product::findOrFail($request->frame_id)->price : 0;
+        $casePrace = $request->has('case_id') ? Product::findOrFail($request->case_id)->price : 0;
+
+        $requestData['price'] = $productPrice + $framePrace + $casePrace;
+
         $order->update($requestData);
 
         return redirect('order')->with('flash_message', 'Order updated!');
@@ -159,8 +212,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        Order::destroy($id);
+        /*Order::destroy($id);
 
-        return redirect('order')->with('flash_message', 'Order deleted!');
+        return redirect('order')->with('flash_message', 'Order deleted!');*/
     }
 }

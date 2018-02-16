@@ -28,23 +28,39 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Customer Id</th><th>Product Id</th><th>Frame Id</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>Customer</th>
+                                        <th>Product</th>
+                                        <th>Frame</th>
+                                        <th>Case</th>
+                                        <th>Price</th>
+                                        <th>Paid amount</th>
+                                        <th>Discount amount</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($order as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->customer_id }}</td><td>{{ $item->product_id }}</td><td>{{ $item->frame_id }}</td>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->customer->full_name }}</td>
+                                        <td>{{ $item->product->name }}</td>
+                                        <td>{{ $item->frame->name }}</td>
+                                        <td>{{ $item->case->name }}</td>
+                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->paid_amount }}</td>
+                                        <td>{{ $item->discount_amount }}</td>
+                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         <td>
                                             <a href="{{ url('/order/' . $item->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
-                                            <form method="POST" action="{{ url('/order' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            {{--<form method="POST" action="{{ url('/order' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-xs" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>
+                                            </form>--}}
                                         </td>
                                     </tr>
                                 @endforeach

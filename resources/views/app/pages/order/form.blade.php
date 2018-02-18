@@ -69,6 +69,24 @@
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+
+<div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
+    <label for="image" class="col-md-4 control-label">{{ 'Şəkil' }}</label>
+    <div class="col-md-6">
+        <input class="form-control" name="image" type="file" id="image">
+        {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+@if(isset($order))
+<div class="form-group {{ $errors->has('sketch') ? 'has-error' : ''}}">
+    <label for="sketch" class="col-md-4 control-label">{{ 'Eskiz' }}</label>
+    <div class="col-md-6">
+        <input class="form-control" name="sketch" type="file" id="sketch">
+        {!! $errors->first('sketch', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+@endif
+
 <div class="form-group {{ $errors->has('note') ? 'has-error' : ''}}">
     <label for="note" class="col-md-4 control-label">{{ 'Note' }}</label>
     <div class="col-md-6">

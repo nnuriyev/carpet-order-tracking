@@ -9,9 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Product;
 use App\ProductCategory;
+use App\Uploader\FileUploader;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class OrderController extends Controller
 {
@@ -103,6 +107,11 @@ class OrderController extends Controller
         $casePrace = $request->has('case_id') ? Product::findOrFail($request->case_id)->price : 0;
 
         $requestData['price'] = $productPrice + $framePrace + $casePrace;
+
+
+        if($request->file('image')){
+            $requestData['image'] =  FileUploader::upload('image','public/order_images/');
+        }
 
         Order::create($requestData);
 
@@ -197,6 +206,15 @@ class OrderController extends Controller
         $casePrace = $request->has('case_id') ? Product::findOrFail($request->case_id)->price : 0;
 
         $requestData['price'] = $productPrice + $framePrace + $casePrace;
+
+        if($request->file('image')){
+            $requestData['image'] =  FileUploader::upload('image','public/order_images/');
+        }
+
+        if($request->file('sketch')){
+            $requestData['sketch'] =  FileUploader::upload('sketch','public/order_sketches/');
+        }
+
 
         $order->update($requestData);
 

@@ -1,3 +1,4 @@
+{{--
 <div class="form-group {{ $errors->has('customer_id') ? 'has-error' : ''}}">
     <label for="customer_id" class="col-md-4 control-label">{{ 'Müştəri' }}</label>
     <div class="col-md-6">
@@ -78,13 +79,13 @@
     </div>
 </div>
 @if(isset($order))
-<div class="form-group {{ $errors->has('sketch') ? 'has-error' : ''}}">
-    <label for="sketch" class="col-md-4 control-label">{{ 'Eskiz' }}</label>
-    <div class="col-md-6">
-        <input class="form-control" name="sketch" type="file" id="sketch">
-        {!! $errors->first('sketch', '<p class="help-block">:message</p>') !!}
+    <div class="form-group {{ $errors->has('sketch') ? 'has-error' : ''}}">
+        <label for="sketch" class="col-md-4 control-label">{{ 'Eskiz' }}</label>
+        <div class="col-md-6">
+            <input class="form-control" name="sketch" type="file" id="sketch">
+            {!! $errors->first('sketch', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
-</div>
 @endif
 
 <div class="form-group {{ $errors->has('note') ? 'has-error' : ''}}">
@@ -99,3 +100,4 @@
         <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'Create' }}">
     </div>
 </div>
+--}}

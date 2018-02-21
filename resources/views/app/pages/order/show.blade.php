@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">order {{ $order->id }}</div>
+                    <div class="panel-heading">Sifariş {{ $order->id }}</div>
                     <div class="panel-body">
 
                         <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -26,37 +26,60 @@
                                         <th>ID</th><td>{{ $order->id }}</td>
                                     </tr>
                                     <tr>
-                                        <th> Customer</th>
+                                        <th> Müştəri</th>
                                         <td> {{ $order->customer->full_name }} </td>
                                     </tr>
                                     <tr>
-                                        <th> Product</th>
+                                        <th> Məhsul</th>
                                         <td> {{ $order->product->code . ' - ' . $order->product->name }} </td>
                                     </tr>
                                     <tr>
-                                        <th> Frame</th>
+                                        <th> Çərçivə</th>
                                         <td> {{ $order->frame->code . ' - ' . $order->frame->name }} </td>
                                     </tr>
                                     <tr>
-                                        <th> Case</th>
+                                        <th> Çanta</th>
                                         <td> {{ $order->case->code . ' - ' . $order->case->name }} </td>
                                     </tr>
                                     <tr>
-                                        <th> Price</th>
+                                        <th> Qiymət</th>
                                         <td> {{ $order->price }} AZN</td>
                                     </tr>
                                     <tr>
-                                        <th> Paid amount</th>
+                                        <th> Ödənilmış məbləğ</th>
                                         <td> {{ $order->paid_amount }} AZN</td>
                                     </tr>
                                     <tr>
-                                        <th> Discount amount</th>
+                                        <th> Endirim məbləği</th>
                                         <td> {{ $order->discount_amount }} AZN</td>
                                     </tr>
                                     <tr>
                                         <th> Status</th>
                                         <td> {{ config('staticData')['orderStatus'][$order->status] }} </td>
                                     </tr>
+                                    <tr>
+                                        <th> Qeyd</th>
+                                        <td> {{ $order->note }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Şəkil</th>
+                                        <td>
+                                            <a href="{{Storage::url($order->image)}}" download>
+                                                <img src="{{Storage::url($order->image)}}" height="150">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Eskiz</th>
+                                        <td>
+                                            @if(!is_null($order->sketch))
+                                            <a href="{{Storage::url($order->sketch)}}" download>
+                                                <img src="{{Storage::url($order->sketch)}}" height="150">
+                                            </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>

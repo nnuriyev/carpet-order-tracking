@@ -230,8 +230,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        /*Order::destroy($id);
+        Order::destroy($id);
 
-        return redirect('order')->with('flash_message', 'Order deleted!');*/
+        return redirect('order')->with('flash_message', 'Order deleted!');
     }
 }

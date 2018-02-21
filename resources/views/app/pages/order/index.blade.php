@@ -29,15 +29,17 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Customer</th>
-                                        <th>Product</th>
-                                        <th>Frame</th>
-                                        <th>Case</th>
-                                        <th>Price</th>
-                                        <th>Paid amount</th>
-                                        <th>Discount amount</th>
+                                        <th>Müştəri</th>
+                                        <th>Məhsul</th>
+                                        <th>Çərçivə</th>
+                                        <th>Çanta</th>
+                                        <th>Qiymət</th>
+                                        <th>Ödənilmış məbləğ</th>
+                                        <th>Endirim məbləği</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>Şəkil</th>
+                                        <th>Eskiz</th>
+                                        <th>Əməliyyatlar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,14 +55,28 @@
                                         <td>{{ $item->discount_amount }}</td>
                                         <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         <td>
+                                            @if(!is_null($item->image))
+                                                <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default" download>
+                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                                </a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(!is_null($item->sketch))
+                                                <a href="{{Storage::url($item->sketch)}}" class="btn btn-xs btn-default">
+                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                                </a>
+                                            @endif
+                                        </td>
+                                        <td>
                                             <a href="{{ url('/order/' . $item->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
-                                            {{--<form method="POST" action="{{ url('/order' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST" action="{{ url('/order' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-xs" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>--}}
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

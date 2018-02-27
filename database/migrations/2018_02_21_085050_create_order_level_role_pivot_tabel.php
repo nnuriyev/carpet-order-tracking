@@ -17,7 +17,7 @@ class CreateOrderLevelRolePivotTabel extends Migration
             $table->increments('id');
             $table->integer('role_id')->unsigned()->nullable();
             $table->integer('order_level_id')->unsigned()->nullable()->index();
-            $table->tinyInteger('access')->nullable(); // 0 => view; 1 => view&write;
+            $table->tinyInteger('access')->nullable(); // 0 => view; 1 => view&write; 2 => full access
             $table->timestamps();
 
             //RELATIONS

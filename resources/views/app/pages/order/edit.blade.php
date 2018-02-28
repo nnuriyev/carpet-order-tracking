@@ -9,8 +9,8 @@
                     <div class="panel-body">
 
 
-                        <form method="POST" action="{{ url('/order/' . $order->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ url('/order/attach-order-level/' . $order->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                            {{ method_field('POST') }}
                             {{ csrf_field() }}
 
                             @include ('app/pages.order.level-form', ['submitButtonText' => 'Update'])

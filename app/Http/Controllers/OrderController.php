@@ -11,6 +11,7 @@ use App\Product;
 use App\ProductCategory;
 use App\Uploader\FileUploader;
 
+use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -142,6 +143,8 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::findOrFail($id);
+        $userRoleId = Auth::user()->roles()->first()->id;
+        $orderLevels = UserRole::findOrFail($userRoleId)->orderLevels->pluck('name', 'id');
 
         $customers = Customer::all();
         $customerList = new Collection();
@@ -185,7 +188,7 @@ class OrderController extends Controller
 
         return view('app/pages.order.edit', compact('order',
             'customerList', 'productList',
-            'frameList', 'casesList'));
+            'frameList', 'casesList', 'orderLevels'));
     }
 
     /**
@@ -217,6 +220,20 @@ class OrderController extends Controller
 
 
         $order->update($requestData);
+
+        return redirect('order')->with('flash_message', 'Order updated!');
+    }
+
+    public function attachOrderLevel(Request $request, $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        $order->orderLevels()->attach($request->order_level_id,
+            [
+                'user_id' => Auth::user()->id,
+                'due_date' => $request->due_date,
+                'note' => $request->note,
+            ]);
 
         return redirect('order')->with('flash_message', 'Order updated!');
     }

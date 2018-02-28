@@ -39,4 +39,14 @@ class Order extends Model
         return $this->belongsTo('App\Product', 'case_id');
     }
 
+    public function orderLevels()
+    {
+        return $this->belongsToMany(
+            'App\OrderLevel',
+            'order_level_order',
+            'order_id',
+            'order_level_id'
+        );
+    }
+
 }

@@ -31,6 +31,9 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('customer', 'CustomerController');
     Route::resource('order', 'OrderController');
 
+    Route::post('order/attach-order-level/{orderId}',
+        'OrderController@attachOrderLevel')->name('attachOrderLevel');
+
     Route::get('/test', function (){
         $user = Auth::user();
         //$user->assignRole('admin');

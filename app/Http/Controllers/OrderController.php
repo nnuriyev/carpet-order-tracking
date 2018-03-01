@@ -12,6 +12,7 @@ use App\ProductCategory;
 use App\Uploader\FileUploader;
 
 use App\UserRole;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,27 @@ class OrderController extends Controller
 
         return view('app/pages.order.index', compact('order'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function currentOrders(Request $request)
+    {
+
+        $order = Order::where('status','!=', 2)->orderBy('id', 'desc')->get();
+
+        //dd($order->checkLastOrderLevelAccess([0]));
+        $user = Auth::user();
+
+        $access = [0];
+        if($user->roles->first()->name == 'admin'){
+            $access = [2];
+        }
+        return view('app/pages.order.index-by-level', compact('order', 'access'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -233,9 +255,10 @@ class OrderController extends Controller
                 'user_id' => Auth::user()->id,
                 'due_date' => $request->due_date,
                 'note' => $request->note,
+                'created_at' => Carbon::now()
             ]);
 
-        return redirect('order')->with('flash_message', 'Order updated!');
+        return redirect()->back();
     }
 
     /**

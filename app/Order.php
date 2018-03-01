@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
@@ -46,7 +47,26 @@ class Order extends Model
             'order_level_order',
             'order_id',
             'order_level_id'
-        );
+        )->withPivot('created_at', 'due_date', 'note');
+    }
+
+    public function lastOrderLevel()
+    {
+        return $this->orderLevels()->orderBy('id', 'desc')->get()->first();
+    }
+
+    public function checkLastOrderLevelAccess($access)
+    {
+        $lastOrderlevel = $this->lastOrderLevel();
+        if(is_null($lastOrderlevel)) return false;
+
+        $accessRoles = $lastOrderlevel->roles()->wherePivotIn('access', $access)->get()->pluck('name')->toArray();
+
+        $userRoleName = Auth::user()->roles->first()->name;
+        if(in_array($userRoleName, $accessRoles)){
+            return true;
+        }
+        return false;
     }
 
 }

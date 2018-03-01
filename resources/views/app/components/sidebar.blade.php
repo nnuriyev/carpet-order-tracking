@@ -18,9 +18,12 @@
                 <a href="{{route('customer.index')}}"><i class="fa fa-users"></i> Müştərilər</a>
             </li>
             <li>
-                <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i> Sifarişlər</a>
+                <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i>Bütün sifarişlər</a>
             </li>
             @endrole
+            <li>
+                <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
+            </li>
         </ul>
     </div>
 </div>

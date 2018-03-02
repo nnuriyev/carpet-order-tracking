@@ -1,6 +1,7 @@
 @extends('app.main-layout')
 
 @section('page-content')
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -29,31 +30,41 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        @role('admin', 'sales')
                                         <th>Müştəri</th>
+                                        @endrole
                                         <th>Məhsul</th>
                                         <th>Çərçivə</th>
                                         <th>Çanta</th>
+                                        @role('admin', 'sales')
                                         <th>Qiymət</th>
                                         <th>Ödənilmış məbləğ</th>
                                         <th>Endirim məbləği</th>
                                         <th>Status</th>
+                                        @endrole
                                         <th>Şəkil</th>
                                         <th>Eskiz</th>
+                                        @role('admin', 'sales')
                                         <th>Əməliyyatlar</th>
+                                        @endrole
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($order as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
+                                        @role('admin', 'sales')
                                         <td>{{ $item->customer->full_name }}</td>
+                                        @endrole
                                         <td>{{ $item->product->name }}</td>
                                         <td>{{ $item->frame->name }}</td>
                                         <td>{{ $item->case->name }}</td>
+                                        @role('admin', 'sales')
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->paid_amount }}</td>
                                         <td>{{ $item->discount_amount }}</td>
                                         <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
+                                        @endrole
                                         <td>
                                             @if(!is_null($item->image))
                                                 <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default" download>
@@ -68,6 +79,7 @@
                                                 </a>
                                             @endif
                                         </td>
+                                        @role('admin', 'sales')
                                         <td>
                                             <a href="{{ url('/order/' . $item->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
@@ -78,6 +90,7 @@
                                                 <button type="submit" class="btn btn-danger btn-xs" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
+                                        @endrole
                                     </tr>
                                 @endforeach
                                 </tbody>

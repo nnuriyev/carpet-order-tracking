@@ -16,7 +16,6 @@ class FirstSAUserSeeder extends Seeder
                 'name'          => 'Nurlan Nuriyev',
                 'email'         => 'nnuriyev6@gmail.com',
                 'password'      => bcrypt('s3cr3t'),
-                'is_active'     => true,
             ]
         ]);
     }

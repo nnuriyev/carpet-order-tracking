@@ -125,12 +125,18 @@ class OrderController extends Controller
         $requestData = $request->all();
         $requestData['user_id'] = Auth::user()->id;
 
-        $productPrice = Product::findOrFail($request->product_id)->price;
-        $framePrace = $request->has('frame_id') ? Product::findOrFail($request->frame_id)->price : 0;
-        $casePrace = $request->has('case_id') ? Product::findOrFail($request->case_id)->price : 0;
+        $product = Product::findOrFail($request->product_id);
+        $frame = Product::findOrFail($request->frame_id);
+        $case = Product::findOrFail($request->case_id);
+
+        $productPrice = $product->price;
+        $framePrace = $request->has('frame_id') ? $frame->price : 0;
+        $casePrace = $request->has('case_id') ? $case->price : 0;
 
         $requestData['price'] = $productPrice + $framePrace + $casePrace;
-
+        $requestData['product_cost'] = $product->cost;
+        $requestData['frame_cost'] = $frame->cost;
+        $requestData['case_cost'] = $case->cost;
 
         if($request->file('image')){
             $requestData['image'] =  FileUploader::upload('image','public/order_images/');
@@ -166,7 +172,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $userRoleId = Auth::user()->roles()->first()->id;
-        $orderLevels = UserRole::findOrFail($userRoleId)->orderLevels->pluck('name', 'id');
+        $orderLevels = UserRole::findOrFail($userRoleId)->orderLevels()->wherePivot('access', '!=', 0)->get()->pluck('name', 'id');
 
         $customers = Customer::all();
         $customerList = new Collection();
@@ -226,11 +232,18 @@ class OrderController extends Controller
         $requestData = $request->all();
         $order = Order::findOrFail($id);
 
-        $productPrice = Product::findOrFail($request->product_id)->price;
-        $framePrace = $request->has('frame_id') ? Product::findOrFail($request->frame_id)->price : 0;
-        $casePrace = $request->has('case_id') ? Product::findOrFail($request->case_id)->price : 0;
+        $product = Product::findOrFail($request->product_id);
+        $frame = Product::findOrFail($request->frame_id);
+        $case = Product::findOrFail($request->case_id);
+
+        $productPrice = $product->price;
+        $framePrace = $request->has('frame_id') ? $frame->price : 0;
+        $casePrace = $request->has('case_id') ? $case->price : 0;
 
         $requestData['price'] = $productPrice + $framePrace + $casePrace;
+        $requestData['product_cost'] = $product->cost;
+        $requestData['frame_cost'] = $frame->cost;
+        $requestData['case_cost'] = $case->cost;
 
         if($request->file('image')){
             $requestData['image'] =  FileUploader::upload('image','public/order_images/');

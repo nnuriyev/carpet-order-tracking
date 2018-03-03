@@ -1,6 +1,11 @@
 @extends('app.main-layout')
 
 @section('page-content')
+
+@php
+$adminAndSales = 'admin|sales';
+@endphp
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -20,6 +25,8 @@
                     </div>
                 </div>
             </div>
+
+            @hasanyrole($adminAndSales)
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Edit order #{{ $order->id }}</div>
@@ -47,6 +54,7 @@
                     </div>
                 </div>
             </div>
+            @endhasanyrole
         </div>
     </div>
 @endsection

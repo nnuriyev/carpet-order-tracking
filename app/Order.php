@@ -11,8 +11,9 @@ class Order extends Model
 
     protected $fillable = [
         'user_id', 'customer_id', 'product_id', 'frame_id',
-        'case_id', 'price', 'paid_amount', 'discount_amount',
-        'status','image', 'sketch', 'note'
+        'case_id','product_cost', 'frame_cost','case_cost',
+        'price', 'paid_cash','paid_terminal', 'paid_online', 
+        'discount_amount', 'status','image', 'sketch', 'note'
     ];
 
     public function user()
@@ -67,6 +68,11 @@ class Order extends Model
             return true;
         }
         return false;
+    }
+
+    public function totalPaidAmount()
+    {
+        return $this->paid_cash + $this->paid_terminal + $this->paid_online;
     }
 
 }

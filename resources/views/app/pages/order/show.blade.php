@@ -1,6 +1,11 @@
 @extends('app.main-layout')
 
 @section('page-content')
+
+@php
+$adminAndSales = 'admin|sales';
+@endphp
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,12 +15,13 @@
 
                         <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <a href="{{ url('/order/' . $order->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
+                        @hasanyrole($adminAndSales)
                         <form method="POST" action="{{ url('order' . '/' . $order->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger btn-xs" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                         </form>
+                        @endhasanyrole
                         <br/>
                         <br/>
 
@@ -25,10 +31,12 @@
                                     <tr>
                                         <th>ID</th><td>{{ $order->id }}</td>
                                     </tr>
+                                    @hasanyrole($adminAndSales)
                                     <tr>
                                         <th> Müştəri</th>
                                         <td> {{ $order->customer->full_name }} </td>
                                     </tr>
+                                    @endhasanyrole
                                     <tr>
                                         <th> Məhsul</th>
                                         <td> {{ $order->product->code . ' - ' . $order->product->name }} </td>
@@ -41,6 +49,7 @@
                                         <th> Çanta</th>
                                         <td> {{ $order->case->code . ' - ' . $order->case->name }} </td>
                                     </tr>
+                                    @hasanyrole($adminAndSales)
                                     <tr>
                                         <th> Qiymət</th>
                                         <td> {{ $order->price }} AZN</td>
@@ -57,6 +66,7 @@
                                         <th> Status</th>
                                         <td> {{ config('staticData')['orderStatus'][$order->status] }} </td>
                                     </tr>
+                                    @endhasanyrole
                                     <tr>
                                         <th> Qeyd</th>
                                         <td> {{ $order->note }} </td>

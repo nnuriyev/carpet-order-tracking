@@ -19,8 +19,8 @@ return [
     ],
 
     'orderStatus' => [
-        0 => 'Təsdiq olunmayıb',
-        1 => 'Təsdiq olunub',
+        0 => 'Yeni sifariş',
+        1 => 'Prosesdə',
         2 => 'Sifariş tamamlanıb'
     ],
 

@@ -42,19 +42,35 @@
         {!! $errors->first('case_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('paid_amount') ? 'has-error' : ''}}">
-    <label for="paid_amount" class="col-md-4 control-label">{{ 'Ödənilmış məbləğ' }}</label>
+<div class="form-group {{ $errors->has('paid_cash') ? 'has-error' : ''}}">
+    <label for="paid_cash" class="col-md-4 control-label">{{ 'Ödənilmış məbləğ(Nağd)' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="paid_amount" type="text" id="paid_amount"
-               value="{{ $order->paid_amount or ''}}">
-        {!! $errors->first('paid_amount', '<p class="help-block">:message</p>') !!}
+        <input class="form-control" name="paid_cash" type="text" id="paid_cash"
+               value="{{ $order->paid_cash or 0}}">
+        {!! $errors->first('paid_cash', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group {{ $errors->has('paid_terminal') ? 'has-error' : ''}}">
+    <label for="paid_terminal" class="col-md-4 control-label">{{ 'Ödənilmış məbləğ(Terminal)' }}</label>
+    <div class="col-md-6">
+        <input class="form-control" name="paid_terminal" type="text" id="paid_terminal"
+               value="{{ $order->paid_terminal or 0 }}">
+        {!! $errors->first('paid_terminal', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group {{ $errors->has('paid_online') ? 'has-error' : ''}}">
+    <label for="paid_online" class="col-md-4 control-label">{{ 'Ödənilmış məbləğ(Online)' }}</label>
+    <div class="col-md-6">
+        <input class="form-control" name="paid_online" type="text" id="paid_online"
+               value="{{ $order->paid_online or 0}}">
+        {!! $errors->first('paid_online', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('discount_amount') ? 'has-error' : ''}}">
     <label for="discount_amount" class="col-md-4 control-label">{{ 'Endirim məbləği' }}</label>
     <div class="col-md-6">
         <input class="form-control" name="discount_amount" type="text" id="discount_amount"
-               value="{{ $order->discount_amount or ''}}">
+               value="{{ $order->discount_amount or 0}}">
         {!! $errors->first('discount_amount', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

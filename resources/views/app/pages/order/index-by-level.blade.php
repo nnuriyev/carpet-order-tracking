@@ -38,6 +38,10 @@ $adminAndSales = 'admin|sales';
                                         <th>Çərçivə</th>
                                         <th>Çanta</th>
 
+                                        @hasanyrole('admin|workshop')
+                                        <th>Maya dəyəri</th>
+                                        @endhasanyrole
+
                                         @hasanyrole($adminAndSales)
                                         <th>Qiymət</th>
                                         <th>Ödənilmış məbləğ</th>
@@ -61,6 +65,9 @@ $adminAndSales = 'admin|sales';
                                         <td>{{ $item->product->name }}</td>
                                         <td>{{ $item->frame->name }}</td>
                                         <td>{{ $item->case->name }}</td>
+                                        @hasanyrole('admin|workshop')
+                                        <td>{{ $item->product_cost }}</td>
+                                        @endhasanyrole
                                         @hasanyrole($adminAndSales)
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->totalPaidAmount() }}</td>

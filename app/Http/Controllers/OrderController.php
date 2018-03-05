@@ -32,12 +32,12 @@ class OrderController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $order = Order::paginate($perPage);
+            $orders = Order::paginate($perPage);
         } else {
-            $order = Order::paginate($perPage);
+            $orders = Order::paginate($perPage);
         }
 
-        return view('app/pages.order.index', compact('order'));
+        return view('app/pages.order.index', compact('orders'));
     }
 
     /**
@@ -53,7 +53,7 @@ class OrderController extends Controller
         //dd($order->checkLastOrderLevelAccess([0]));
         $user = Auth::user();
 
-        $access = [0];
+        $access = [0, 2];
         if($user->roles->first()->name == 'admin'){
             $access = [2];
         }
@@ -160,6 +160,21 @@ class OrderController extends Controller
 
         return view('app/pages.order.show', compact('order'));
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function invoice($id)
+    {
+        $order = Order::findOrFail($id);
+
+        return view('app/pages.order.invoice', compact('order'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

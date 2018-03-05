@@ -34,26 +34,16 @@
             <li>
                 <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i>Bütün sifarişlər</a>
             </li>
-<<<<<<< HEAD
-=======
             <li>
                 <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
             </li>
             @endrole
             @role('workshop')
->>>>>>> 334f57bbf75847883fc6d0ba8b280452b207b8b9
+
             <li>
                 <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
             </li>
             @endrole
-<<<<<<< HEAD
-            @role('workshop')
-            <li>
-                <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
-            </li>
-            @endrole
-=======
->>>>>>> 334f57bbf75847883fc6d0ba8b280452b207b8b9
         </ul>
     </div>
 </div>

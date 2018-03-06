@@ -106,7 +106,7 @@ $adminAndSales = 'admin|sales';
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-xs-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
+                                    {{--<p class="lead">Tamamlanma vaxtı: {{$order->lastOrderLevel()->pivot->created_at}}</p>--}}
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
@@ -148,4 +148,13 @@ $adminAndSales = 'admin|sales';
             </div>
         </div>
     </div>
+
+<style>
+    @media print {
+        footer *, .top_nav *,  .no-print *, .sidebar *, .x_title{
+            display: none;
+        }
+    }
+</style>
+
 @endsection

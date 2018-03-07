@@ -2,9 +2,9 @@
 
 @section('page-content')
 
-@php
-    $adminAndSales = 'admin|sales';
-@endphp
+    @php
+        $adminAndSales = 'admin|sales';
+    @endphp
 
     <div class="container">
         <div class="row">
@@ -13,56 +13,102 @@
                     <div class="panel-heading">Order</div>
                     <div class="panel-body">
                         @hasanyrole($adminAndSales)
-                        <a href="{{ url('/order/create') }}" class="btn btn-success btn-sm" title="Add New order">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+                        <div class="col-md-1">
+                            <label class="control-label">&nbsp;</label>
+                            <a href="{{ url('/order/create') }}" class="btn btn-success btn-sm" title="Add New order">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            </a>
+                        </div>
                         @endhasanyrole
+                        <form action="{{route('order.index')}}" method="get">
+                            <div class="col-md-10">
+                                <div class="col-md-2">
+                                    <label for="paid_cash" class="col-md-4 control-label">Müştəri</label>
+                                    <input class="form-control" name="customer" type="text" value="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="paid_cash" class="col-md-4 control-label">Məhsul</label>
+                                    <input class="form-control" name="product" type="text" value="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="paid_cash" class="col-md-4 control-label">Çərçivə</label>
+                                    <select class="form-control" name="frame">
+                                        <option value="">Seçim edin</option>
+                                        <option value="1">Var</option>
+                                        <option value="0">Yoxdur</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="paid_cash" class="col-md-4 control-label">Çanta</label>
+                                    <select class="form-control" name="case">
+                                        <option value="">Seçim edin</option>
+                                        <option value="0">Var</option>
+                                        <option value="0">Yoxdur</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="paid_cash" class="col-md-4 control-label">Eskiz</label>
+                                    <select class="form-control" name="frame">
+                                        <option value="">Seçim edin</option>
+                                        <option value="0">Var</option>
+                                        <option value="0">Yoxdur</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="paid_cash" class="col-md-12 control-label">Sifariş mərhələsi</label>
+                                    <select class="form-control" name="order_level">
+                                        <option value="">Seçim edin</option>
+                                        <option value="0">Test elevel</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                        <form method="GET" action="{{ url('/order') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                            <div class="col-md-1">
+                                <label class="control-label col-md-12">&nbsp;</label>
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Axtar
+                                </button>
                             </div>
                         </form>
 
                         <br/>
                         <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        @hasanyrole($adminAndSales)
-                                        <th>Müştəri</th>
-                                        @endhasanyrole
+                                <tr>
+                                    <th>#</th>
+                                    @hasanyrole($adminAndSales)
+                                    <th>Müştəri</th>
+                                    @endhasanyrole
 
-                                        <th>Məhsul</th>
-                                        <th>Çərçivə</th>
-                                        <th>Çanta</th>
+                                    <th>Məhsul</th>
+                                    <th>Çərçivə</th>
+                                    <th>Çanta</th>
 
-                                        @hasanyrole('admin|workshop')
-                                        <th>Maya dəyəri</th>
-                                        @endhasanyrole
+                                    @hasanyrole('admin|workshop')
+                                    <th>Maya dəyəri</th>
+                                    @endhasanyrole
 
-                                        @hasanyrole($adminAndSales)
-                                        <th>Qiymət</th>
-                                        <th>Ödənilmış məbləğ</th>
-                                        <th>Endirim məbləği</th>
-                                        <th>Status</th>
-                                        @endhasanyrole
+                                    @hasanyrole($adminAndSales)
+                                    <th>Qiymət</th>
+                                    <th>Ödənilmış məbləğ</th>
+                                    <th>Endirim məbləği</th>
+                                    <th>Status</th>
+                                    @endhasanyrole
 
-                                        <th>Şəkil</th>
-                                        <th>Eskiz</th>
+                                    <th>Şəkil</th>
+                                    <th>Eskiz</th>
 
-                                        @hasanyrole($adminAndSales)
-                                        <th>Əməliyyatlar</th>
-                                        @endhasanyrole
+                                    @hasanyrole($adminAndSales)
+                                    <th>Əməliyyatlar</th>
+                                    @endhasanyrole
 
-                                    </tr>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($orders as $item)
@@ -85,27 +131,41 @@
                                         @endhasanyrole
                                         <td>
                                             @if(!is_null($item->image))
-                                                <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default" download>
+                                                <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default"
+                                                   download>
                                                     <i class="fa fa-cloud-download" aria-hidden="true"></i>
                                                 </a>
                                             @endif
                                         </td>
                                         <td>
                                             @if(!is_null($item->sketch))
-                                                <a href="{{Storage::url($item->sketch)}}" class="btn btn-xs btn-default">
+                                                <a href="{{Storage::url($item->sketch)}}"
+                                                   class="btn btn-xs btn-default">
                                                     <i class="fa fa-cloud-download" aria-hidden="true"></i>
                                                 </a>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ url('/order/' . $item->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/order/' . $item->id) }}" title="View order">
+                                                <button class="btn btn-info btn-xs"><i class="fa fa-eye"
+                                                                                       aria-hidden="true"></i> View
+                                                </button>
+                                            </a>
+                                            <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order">
+                                                <button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"
+                                                                                          aria-hidden="true"></i> Edit
+                                                </button>
+                                            </a>
 
                                             @hasanyrole($adminAndSales)
-                                            <form method="POST" action="{{ url('/order' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST" action="{{ url('/order' . '/' . $item->id) }}"
+                                                  accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-xs" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-xs" title="Delete order"
+                                                        onclick="return confirm(&quot;Confirm delete?&quot;)"><i
+                                                            class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                                                </button>
                                             </form>
                                             @endhasanyrole
                                         </td>
@@ -115,7 +175,6 @@
                             </table>
                             <div class="pagination-wrapper"> {!! $orders->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
-
                     </div>
                 </div>
             </div>

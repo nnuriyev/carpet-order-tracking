@@ -11,6 +11,7 @@ use App\Product;
 use App\ProductCategory;
 use App\Uploader\FileUploader;
 
+use App\User;
 use App\UserRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -26,15 +27,35 @@ class OrderController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, Order $orders)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
+        if($request->has('customer')){
+            $orders = $orders->whereHas('user', function ($query) use ($request){
+                $query->where('users.name', 'like', '%' . $request->customer . '%');
+            });
+        }
 
-        if (!empty($keyword)) {
-            $orders = Order::paginate($perPage);
-        } else {
-            $orders = Order::paginate($perPage);
+        if($request->has('product')){
+            $orders = $orders->whereHas('product', function ($query) use ($request){
+                $query->where('products.name', 'like', '%' . $request->product . '%')
+                ->orWhere('products.code', '=', $request->product );
+            });
+        }
+
+        if($request->has('frame')){
+
+            dd($request->frame);
+            $operator = $request->frame == 1 ? '!=' : '==';
+            $orders = $orders->where('frame_id', $operator, null);
+        }
+
+        $perPage = 1;
+        $orders = $orders->paginate($perPage);
+
+        if(count($request->all()) > 0 ){
+            $orders->appends(request()->query())->links();
+        }else{
+
         }
 
         return view('app/pages.order.index', compact('orders'));

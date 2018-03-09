@@ -25,7 +25,11 @@
                                     <tr>
                                         <th>ID</th><td>{{ $product->id }}</td>
                                     </tr>
-                                    <tr><th> Category</th><td> {{ $product->category->name }} </td></tr><tr><th> Code </th><td> {{ $product->code }} </td></tr><tr><th> Name </th><td> {{ $product->name }} </td></tr>
+                                    <tr><th> Category</th><td> {{ isset($product->category->name) ? $product->category->name : null }} </td></tr>
+                                    <tr><th> Code </th><td> {{ $product->code }} </td></tr>
+                                    <tr><th> Name </th><td> {{ $product->name }} </td></tr>
+                                    <tr><th> Cost </th><td> {{ $product->cost }} </td></tr>
+                                    <tr><th> Price </th><td> {{ $product->price }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

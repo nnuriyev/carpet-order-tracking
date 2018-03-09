@@ -28,14 +28,24 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Category</th><th>Code</th><th>Name</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>Category</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Cost</th>
+                                        <th>Price</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($product as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->category->name }}</td><td>{{ $item->code }}</td><td>{{ $item->name }}</td>
+                                        <td>{{ isset($item->category->name) ? $item->category->name : null }}</td>
+                                        <td>{{ $item->code }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->cost }}</td>
+                                        <td>{{ $item->price }}</td>
                                         <td>
                                             <a href="{{ url('/product/' . $item->id) }}" title="View product"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/product/' . $item->id . '/edit') }}" title="Edit product"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

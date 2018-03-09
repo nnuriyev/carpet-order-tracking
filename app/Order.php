@@ -11,9 +11,10 @@ class Order extends Model
 
     protected $fillable = [
         'user_id', 'customer_id', 'product_id', 'frame_id',
-        'case_id','product_cost', 'frame_cost','case_cost',
-        'price', 'paid_cash','paid_terminal', 'paid_online', 
-        'discount_amount', 'status','image', 'sketch', 'note'
+        'case_id', 'product_cost', 'frame_cost', 'case_cost',
+        'price', 'paid_cash', 'paid_terminal', 'paid_online',
+        'discount_amount', 'status', 'last_order_level_id',
+        'image', 'sketch', 'note'
     ];
 
     public function user()
@@ -53,18 +54,23 @@ class Order extends Model
 
     public function lastOrderLevel()
     {
+        return $this->belongsTo('App\OrderLevel', 'last_order_level_id');
+    }
+
+    public function lastorderLevelByPivot()
+    {
         return $this->orderLevels()->orderBy('id', 'desc')->get()->first();
     }
 
     public function checkLastOrderLevelAccess($access)
     {
-        $lastOrderlevel = $this->lastOrderLevel();
-        if(is_null($lastOrderlevel)) return false;
+        $lastOrderlevel = $this->lastOrderLevel;
+        if (is_null($lastOrderlevel)) return false;
 
         $accessRoles = $lastOrderlevel->roles()->wherePivotIn('access', $access)->get()->pluck('name')->toArray();
 
         $userRoleName = Auth::user()->roles->first()->name;
-        if(in_array($userRoleName, $accessRoles)){
+        if (in_array($userRoleName, $accessRoles)) {
             return true;
         }
         return false;

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Order;
+use App\OrderLevel;
 use App\Product;
 use App\ProductCategory;
 use App\Uploader\FileUploader;
@@ -17,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -29,36 +31,49 @@ class OrderController extends Controller
      */
     public function index(Request $request, Order $orders)
     {
-        if($request->has('customer')){
+        if($request->has('customer') && !is_null($request->customer)){
             $orders = $orders->whereHas('user', function ($query) use ($request){
                 $query->where('users.name', 'like', '%' . $request->customer . '%');
             });
         }
 
-        if($request->has('product')){
+        if($request->has('product') && !is_null($request->product)){
             $orders = $orders->whereHas('product', function ($query) use ($request){
                 $query->where('products.name', 'like', '%' . $request->product . '%')
                 ->orWhere('products.code', '=', $request->product );
             });
         }
 
-        if($request->has('frame')){
-
-            dd($request->frame);
-            $operator = $request->frame == 1 ? '!=' : '==';
+        if($request->has('frame') && !is_null($request->frame)){
+            $operator = $request->frame == 1 ? '!=' : '=';
             $orders = $orders->where('frame_id', $operator, null);
         }
 
-        $perPage = 1;
+        if($request->has('case') && !is_null($request->case)){
+            $operator = $request->case == 1 ? '!=' : '=';
+            $orders = $orders->where('case_id', $operator, null);
+        }
+
+        if($request->has('sketch') && !is_null($request->sketch)){
+            $operator = $request->sketch == 1 ? '!=' : '=';
+            $orders = $orders->where('sketch', $operator, null);
+        }
+
+        if($request->has('order_level') && !is_null($request->order_level)){
+            $operator = $request->order_level == 1 ? '!=' : '=';
+            $orders = $orders->where('last_order_level_id', $operator, null);
+        }
+
+        $perPage = 100;
         $orders = $orders->paginate($perPage);
 
         if(count($request->all()) > 0 ){
             $orders->appends(request()->query())->links();
-        }else{
-
         }
 
-        return view('app/pages.order.index', compact('orders'));
+        $orderLevels = OrderLevel::pluck('name', 'id');
+
+        return view('app/pages.order.index', compact('orders','orderLevels'));
     }
 
     /**
@@ -289,7 +304,6 @@ class OrderController extends Controller
             $requestData['sketch'] =  FileUploader::upload('sketch','public/order_sketches/');
         }
 
-
         $order->update($requestData);
 
         return redirect('order')->with('flash_message', 'Order updated!');
@@ -298,6 +312,8 @@ class OrderController extends Controller
     public function attachOrderLevel(Request $request, $orderId)
     {
         $order = Order::findOrFail($orderId);
+        $order->last_order_level_id = $request->order_level_id;
+        $order->save();
 
         $order->orderLevels()->attach($request->order_level_id,
             [

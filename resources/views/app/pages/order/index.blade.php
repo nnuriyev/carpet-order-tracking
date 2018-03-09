@@ -10,55 +10,61 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Order</div>
+                    <div class="panel-heading">Order
+                        <a href="{{ url('/order/create') }}" class="btn btn-success btn-xs" title="Add New order">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Yeni sifariş
+                        </a>
+                    </div>
                     <div class="panel-body">
                         @hasanyrole($adminAndSales)
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
-                            <a href="{{ url('/order/create') }}" class="btn btn-success btn-sm" title="Add New order">
-                                <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            <a href="{{ url('/order') }}" class="btn btn-danger btn-sm">
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
                             </a>
                         </div>
                         @endhasanyrole
                         <form action="{{route('order.index')}}" method="get">
                             <div class="col-md-10">
                                 <div class="col-md-2">
-                                    <label for="paid_cash" class="col-md-4 control-label">Müştəri</label>
-                                    <input class="form-control" name="customer" type="text" value="">
+                                    <label class="col-md-4 control-label">Müştəri</label>
+                                    <input class="form-control" name="customer" type="text" value="{{request('customer')}}">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="paid_cash" class="col-md-4 control-label">Məhsul</label>
-                                    <input class="form-control" name="product" type="text" value="">
+                                    <label class="col-md-4 control-label">Məhsul</label>
+                                    <input class="form-control" name="product" type="text" value="{{request('product')}}">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="paid_cash" class="col-md-4 control-label">Çərçivə</label>
+                                    <label class="col-md-4 control-label">Çərçivə</label>
                                     <select class="form-control" name="frame">
                                         <option value="">Seçim edin</option>
-                                        <option value="1">Var</option>
-                                        <option value="0">Yoxdur</option>
+                                        <option {{ request('frame') == '1'  ? 'selected' : ''}} value="1">Var</option>
+                                        <option {{ request('frame') == '0'  ? 'selected' : ''}} value="0">Yoxdur</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="paid_cash" class="col-md-4 control-label">Çanta</label>
+                                    <label class="col-md-4 control-label">Çanta</label>
                                     <select class="form-control" name="case">
                                         <option value="">Seçim edin</option>
-                                        <option value="0">Var</option>
-                                        <option value="0">Yoxdur</option>
+                                        <option {{ request('case') == '1'  ? 'selected' : ''}} value="1">Var</option>
+                                        <option {{ request('case') == '0'  ? 'selected' : ''}} value="0">Yoxdur</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="paid_cash" class="col-md-4 control-label">Eskiz</label>
-                                    <select class="form-control" name="frame">
+                                    <select class="form-control" name="sketch">
                                         <option value="">Seçim edin</option>
-                                        <option value="0">Var</option>
-                                        <option value="0">Yoxdur</option>
+                                        <option {{ request('sketch') == '1'  ? 'selected' : ''}} value="1">Var</option>
+                                        <option {{ request('sketch') == '0'  ? 'selected' : ''}} value="0">Yoxdur</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="paid_cash" class="col-md-12 control-label">Sifariş mərhələsi</label>
                                     <select class="form-control" name="order_level">
                                         <option value="">Seçim edin</option>
-                                        <option value="0">Test elevel</option>
+                                        @foreach ($orderLevels as $optionKey => $optionValue)
+                                            <option value="{{ $optionKey }}" {{ request('order_level') == $optionKey  ? 'selected' : ''}}>{{ $optionValue }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -101,6 +107,7 @@
                                     <th>Status</th>
                                     @endhasanyrole
 
+                                    <th>Mərhələ</th>
                                     <th>Şəkil</th>
                                     <th>Eskiz</th>
 
@@ -128,6 +135,7 @@
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
                                         <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
+                                        <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         @endhasanyrole
                                         <td>
                                             @if(!is_null($item->image))

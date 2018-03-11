@@ -5,20 +5,64 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Customer</div>
+                    <div class="panel-heading">Customer <a href="{{ url('/customer/create') }}" class="btn btn-success btn-xs" title="Add New customer">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                    </a></div>
                     <div class="panel-body">
-                        <a href="{{ url('/customer/create') }}" class="btn btn-success btn-sm" title="Add New customer">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+                        
+                        <div class="col-md-1">
+                            <label class="control-label">&nbsp;</label>
+                            <a href="{{ url('/customer') }}" class="btn btn-danger btn-sm">
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
+                            </a>
+                        </div>
 
-                        <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                        <form action="{{route('customer.index')}}" method="get">
+                            <div class="col-md-10">
+                                <div class="col-md-2">
+                                    <label class="control-label">Ad soyad</label>
+                                    <input class="form-control" name="full_name" type="text" value="{{request('full_name')}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Email</label>
+                                    <input class="form-control" name="email" type="text" value="{{request('email')}}">
+                                </div>
+                                <div class="col-md-2">
+                                        <label class="control-label">Telefon</label>
+                                        <input class="form-control" name="phone" type="text" value="{{request('phone')}}">
+                                    </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Cins</label>
+                                    <select class="form-control" name="gender">
+                                        <option value="">Seçim edin</option>
+                                        <option {{ request('gender') == '1'  ? 'selected' : ''}} value="1">Kişi</option>
+                                        <option {{ request('gender') == '0'  ? 'selected' : ''}} value="0">Qadın</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Tip</label>
+                                    <select class="form-control" name="type">
+                                        <option value="">Seçim edin</option>
+                                        <option {{ request('type') == '0'  ? 'selected' : ''}} value="0">VIP</option>
+                                        <option {{ request('type') == '1'  ? 'selected' : ''}} value="1">Standart</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="">Seçim edin</option>
+                                        <option {{ request('status') == '0'  ? 'selected' : ''}} value="0">Nəzarətdə</option>
+                                        <option {{ request('status') == '1'  ? 'selected' : ''}} value="1">Maraqlandı</option>
+                                        <option {{ request('status') == '2'  ? 'selected' : ''}} value="2">Sifariş</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <label class="control-label col-md-12">&nbsp;</label>
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Axtar
+                                </button>
                             </div>
                         </form>
 

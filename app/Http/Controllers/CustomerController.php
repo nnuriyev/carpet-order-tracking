@@ -15,15 +15,39 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, Customer $customer)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
+        //'like', '%' . $request->product . '%'
 
-        if (!empty($keyword)) {
-            $customer = Customer::paginate($perPage);
-        } else {
-            $customer = Customer::paginate($perPage);
+        if($request->has('full_name') && !is_null($request->full_name)){
+            $customer = $customer->where('full_name', 'like', '%' . $request->full_name . '%');
+        }
+
+        if($request->has('email') && !is_null($request->email)){
+            $customer = $customer->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        if($request->has('phone') && !is_null($request->phone)){
+            $customer = $customer->where('phone', 'like', '%' . $request->phone . '%');
+        }
+
+        if($request->has('gender') && !is_null($request->gender)){
+            $customer = $customer->where('gender', '=', $request->gender);
+        }
+
+        if($request->has('type') && !is_null($request->type)){
+            $customer = $customer->where('type', '=', $request->type);
+        }
+
+        if($request->has('status') && !is_null($request->status)){
+            $customer = $customer->where('status', '=', $request->status);
+        }
+
+        $perPage = 100;
+        $customer = $customer->orderBy('id', 'desc')->paginate($perPage);
+
+        if(count($request->all()) > 0 ){
+            $customer->appends(request()->query())->links();
         }
 
         return view('app/pages.customer.index', compact('customer'));

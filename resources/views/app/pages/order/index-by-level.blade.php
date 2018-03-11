@@ -3,26 +3,14 @@
 @section('page-content')
 
 @php
-$adminAndSales = 'admin|sales';
+    $adminAndSales = 'admin|sales';
 @endphp
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Order</div>
                     <div class="panel-body">
-                        <form method="GET" action="{{ url('/order') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-
                         <br/>
                         <br/>
                         <div class="table-responsive">

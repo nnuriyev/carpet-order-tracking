@@ -10,18 +10,6 @@
                         <a href="{{ url('/product-category/create') }}" class="btn btn-success btn-sm" title="Add New productCategory">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
-
-                        <form method="GET" action="{{ url('/product-category') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-
                         <br/>
                         <br/>
                         <div class="table-responsive">

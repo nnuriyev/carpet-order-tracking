@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\ProductCategory;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -36,7 +37,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('app/pages.user.create');
+        $productCategories = ProductCategory::pluck('name', 'id');
+        return view('app/pages.user.create', compact('productCategories'));
     }
 
     /**
@@ -52,6 +54,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->product_category_id = $request->product_category_id;
         $user->save();
         $user->assignRole($request->role);
 
@@ -82,8 +85,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $productCategories = ProductCategory::pluck('name', 'id');
 
-        return view('app/pages.user.edit', compact('user'));
+        return view('app/pages.user.edit', compact('user', 'productCategories'));
     }
 
     /**
@@ -104,6 +108,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->product_category_id = $request->product_category_id;
 
             $user->save();
         } else {

@@ -10,18 +10,6 @@
                         <a href="{{ url('/user/create') }}" class="btn btn-success btn-sm" title="Add New user">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
-
-                        {{--  <form method="GET" action="{{ url('/user') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>  --}}
-
                         <br/>
                         <br/>
                         <div class="table-responsive">
@@ -32,6 +20,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th>Product Category</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -39,7 +28,10 @@
                                 @foreach($user as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->email }}</td><td>{{ $item->getRoleNames()->first() }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->getRoleNames()->first() }}</td>
+                                        <td>{{ isset($item->productCategory) ? $item->productCategory->name:null}}</td>
                                         <td>
                                             <a href="{{ url('/user/' . $item->id) }}" title="View user"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/user/' . $item->id . '/edit') }}" title="Edit user"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

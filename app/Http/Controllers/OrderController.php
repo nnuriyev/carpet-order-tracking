@@ -65,7 +65,7 @@ class OrderController extends Controller
         }
 
         $perPage = 100;
-        $orders = $orders->paginate($perPage);
+        $orders = $orders->orderBy('id', 'desc')->paginate($perPage);
 
         if(count($request->all()) > 0 ){
             $orders->appends(request()->query())->links();
@@ -84,15 +84,26 @@ class OrderController extends Controller
     public function currentOrders(Request $request)
     {
 
-        $order = Order::where('status','!=', 2)->orderBy('id', 'desc')->get();
-
-        //dd($order->checkLastOrderLevelAccess([0]));
         $user = Auth::user();
-
+        
         $access = [0, 2];
         if($user->roles->first()->name == 'admin'){
             $access = [2];
         }
+
+        $order = Order::where('status','!=', 2);
+
+        if($user->roles->first()->name == 'workshop'){
+            $order = $order->whereHas('product', function ($query) use ($user){
+                $query->where('product.category_id', '=', $user->product_category_id);
+            });
+        }
+
+       $order = $order->orderBy('id', 'desc')->get();
+
+        
+//dd($order);
+        
         return view('app/pages.order.index-by-level', compact('order', 'access'));
     }
 

@@ -7,7 +7,7 @@
     @endforeach
 </select>
         {!! $errors->first('category_id', '<p class="help-block">:message</p>') !!}
-    </div>
+</div>
 </div><div class="form-group {{ $errors->has('code') ? 'has-error' : ''}}">
     <label for="code" class="col-md-4 control-label">{{ 'Code' }}</label>
     <div class="col-md-6">

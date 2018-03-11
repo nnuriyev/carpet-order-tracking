@@ -11,19 +11,21 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Order
+                        @hasanyrole($adminAndSales)
                         <a href="{{ url('/order/create') }}" class="btn btn-success btn-xs" title="Add New order">
                             <i class="fa fa-plus" aria-hidden="true"></i> Yeni sifariş
                         </a>
+                        @endhasanyrole
                     </div>
                     <div class="panel-body">
-                        @hasanyrole($adminAndSales)
+                        
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
                             <a href="{{ url('/order') }}" class="btn btn-danger btn-sm">
                                 <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
                             </a>
                         </div>
-                        @endhasanyrole
+                        
                         <form action="{{route('order.index')}}" method="get">
                             <div class="col-md-10">
                                 <div class="col-md-2">
@@ -59,7 +61,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="paid_cash" class="col-md-12 control-label">Sifariş mərhələsi</label>
+                                    <label for="paid_cash" class="col-md-12 control-label">Sifariş m.</label>
                                     <select class="form-control" name="order_level">
                                         <option value="">Seçim edin</option>
                                         @foreach ($orderLevels as $optionKey => $optionValue)
@@ -76,11 +78,6 @@
                                 </button>
                             </div>
                         </form>
-
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
                         <br/>
                         <br/>
                         <div class="table-responsive">

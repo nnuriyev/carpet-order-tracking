@@ -28,6 +28,7 @@
 
                                         @hasanyrole('admin|workshop')
                                         <th>Maya dəyəri</th>
+                                        <th>Kargo (Emalatxana)</th>
                                         @endhasanyrole
 
                                         @hasanyrole($adminAndSales)
@@ -55,6 +56,7 @@
                                         <td>{{ $item->case->name }}</td>
                                         @hasanyrole('admin|workshop')
                                         <td>{{ $item->product_cost }}</td>
+                                        <td>{{ $item->cargo_cost }}</td>
                                         @endhasanyrole
                                         @hasanyrole($adminAndSales)
                                         <td>{{ $item->price }}</td>

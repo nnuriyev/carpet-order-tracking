@@ -95,15 +95,12 @@ class OrderController extends Controller
 
         if($user->roles->first()->name == 'workshop'){
             $order = $order->whereHas('product', function ($query) use ($user){
-                $query->where('product.category_id', '=', $user->product_category_id);
+                $query->where('products.category_id', '=', $user->product_category_id);
             });
         }
 
        $order = $order->orderBy('id', 'desc')->get();
 
-        
-//dd($order);
-        
         return view('app/pages.order.index-by-level', compact('order', 'access'));
     }
 
@@ -333,6 +330,15 @@ class OrderController extends Controller
                 'note' => $request->note,
                 'created_at' => Carbon::now()
             ]);
+
+        return redirect()->back();
+    }
+
+    public function updateCargoCost(Request $request, $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        $order->cargo_cost = $request->cargo_cost;
+        $order->save();
 
         return redirect()->back();
     }

@@ -54,6 +54,16 @@ $adminAndSales = 'admin|sales';
                                         <th> Çanta</th>
                                         <td> {{ $order->case->code . ' - ' . $order->case->name }} </td>
                                     </tr>
+                                    @hasanyrole('admin|workshop')
+                                    <tr>
+                                        <th> Maya dəyəri</th>
+                                        <td> {{ $order->product_cost }} AZN</td>
+                                    </tr>
+                                    <tr>
+                                        <th> Kargo (Emalatxana)</th>
+                                        <td> {{ $order->cargo_cost }} AZN</td>
+                                    </tr>
+                                    @endhasanyrole
                                     @hasanyrole($adminAndSales)
                                     <tr>
                                         <th> Qiymət</th>
@@ -61,7 +71,7 @@ $adminAndSales = 'admin|sales';
                                     </tr>
                                     <tr>
                                         <th> Ödənilmış məbləğ</th>
-                                        <td> {{ $order->paid_amount }} AZN</td>
+                                        <td> {{ $order->totalPaidAmount() }} AZN</td>
                                     </tr>
                                     <tr>
                                         <th> Endirim məbləği</th>

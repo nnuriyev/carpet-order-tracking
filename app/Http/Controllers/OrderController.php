@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\CustomerPayment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -356,4 +357,39 @@ class OrderController extends Controller
 
         return redirect('order')->with('flash_message', 'Order deleted!');
     }
+
+
+    public function addPayment(Request $request, $orderId)
+    {
+        $payment = new CustomerPayment();
+        $payment->order_id = $orderId;
+        $payment->user_id = Auth::user()->id;
+        $payment->amount = $request->amount;
+        $payment->type = $request->type;
+        $payment->save();
+
+        $order = Order::findOrFail($orderId);
+        $amountKey = null;
+
+        if($request->type == 1){
+            $amountKey = 'paid_cash';
+        }elseif($request->type == 2){
+            $amountKey = 'paid_online';
+        }elseif($request->type == 3){
+            $amountKey = 'paid_terminal';
+        }
+
+        $order[$amountKey] += $request->amount;
+        $order->save();
+
+        return redirect()->back();
+    }
+
+    /*public function deletePayment($id)
+    {
+        CustomerPayment::destroy($id);
+        return redirect()->back();
+    }*/
+
+
 }

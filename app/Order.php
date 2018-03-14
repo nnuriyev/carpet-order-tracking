@@ -17,6 +17,11 @@ class Order extends Model
         'last_order_level_id', 'image', 'sketch', 'note'
     ];
 
+    public function cutomerPayments()
+    {
+        return $this->hasMany('App\CustomerPayment');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

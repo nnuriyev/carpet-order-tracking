@@ -37,6 +37,8 @@ Route::group(['middleware'=>'auth'], function (){
         'OrderController@attachOrderLevel')->name('attachOrderLevel');
     Route::post('order/cargo-cost/{orderId}',
         'OrderController@updateCargoCost')->name('updateCargoCost');
+    Route::post('order/payment/add/{orderId}',
+        'OrderController@addPayment')->name('addPayment');
 
     Route::get('/test', function (){
         $user = Auth::user();

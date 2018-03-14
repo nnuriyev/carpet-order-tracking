@@ -23,5 +23,10 @@ return [
         1 => 'Prosesdə',
         2 => 'Sifariş tamamlanıb'
     ],
+    'paymentType'=>[
+        1=>'Nağd',
+        2=>'Online',
+        3=>'Terminal'
+    ]
 
 ];

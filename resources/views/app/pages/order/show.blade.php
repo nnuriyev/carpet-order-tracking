@@ -141,6 +141,35 @@ $adminAndSales = 'admin|sales';
 
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Sifariş ödənişləri</div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nəbləğ</th>
+                                    <th>Ödəniş tipi</th>
+                                    <th>Ödəniş tarixi</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($order->cutomerPayments as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->amount }} AZN</td>
+                                        <td>{{ config('staticData')['paymentType'][$item->type] }}</td>
+                                        <td>{{ $item->created_at }}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

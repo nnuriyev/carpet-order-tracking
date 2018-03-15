@@ -96,7 +96,6 @@ class ProductCategoryController extends Controller
     {
         
         $requestData = $request->all();
-        
         $productcategory = ProductCategory::findOrFail($id);
         $productcategory->update($requestData);
 
@@ -113,7 +112,6 @@ class ProductCategoryController extends Controller
     public function destroy($id)
     {
         ProductCategory::destroy($id);
-
         return redirect('product-category')->with('flash_message', 'ProductCategory deleted!');
     }
 }

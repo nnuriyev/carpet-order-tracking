@@ -300,10 +300,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+        
+        
+
+
+
+
         $requestData = $request->all();
         $order = Order::findOrFail($id);
 
+        $product = Product::findOrFail($request->product_id);
+        
         $framePrace = 0;
         if($request->has('frame_id')){
  			$frame = Product::findOrFail($request->frame_id);
@@ -317,7 +324,7 @@ class OrderController extends Controller
         }
        
         $productPrice = $product->price;
-
+   
         $requestData['price'] = $productPrice + $framePrace + $casePrace;
         $requestData['product_cost'] = $product->cost;
         $requestData['frame_cost'] = isset($frame->cost) ? $frame->cost : 0;

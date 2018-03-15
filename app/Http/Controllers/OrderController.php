@@ -189,7 +189,7 @@ class OrderController extends Controller
 
         Order::create($requestData);
 
-        return redirect('user-order')->with('flash_message', 'Order added!');
+        return redirect('order')->with('flash_message', 'Order added!');
     }
 
     /**
@@ -315,7 +315,7 @@ class OrderController extends Controller
 
         $order->update($requestData);
 
-        return redirect('user-order')->with('flash_message', 'Order updated!');
+        return redirect('order')->with('flash_message', 'Order updated!');
     }
 
     public function attachOrderLevel(Request $request, $orderId)
@@ -355,7 +355,7 @@ class OrderController extends Controller
     {
         Order::destroy($id);
 
-        return redirect('user-order')->with('flash_message', 'Order deleted!');
+        return redirect('order')->with('flash_message', 'Order deleted!');
     }
 
 
@@ -386,8 +386,7 @@ class OrderController extends Controller
     }
 
 
-
-
+    
     /*public function deletePayment($id)
     {
         CustomerPayment::destroy($id);

@@ -18,7 +18,7 @@
                 <a href="{{route('customer.index')}}"><i class="fa fa-users"></i> Müştərilər</a>
             </li>
             <li>
-                <a href="{{route('user-order.index')}}"><i class="fa fa-cart-arrow-down"></i>Bütün sifarişlər</a>
+                <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i>Bütün sifarişlər</a>
             </li>
             <li>
                 <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>

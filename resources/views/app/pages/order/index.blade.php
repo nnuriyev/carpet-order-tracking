@@ -12,7 +12,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Order
                         @hasanyrole($adminAndSales)
-                        <a href="{{ url('/user-order/create') }}" class="btn btn-success btn-xs" title="Add New order">
+                        <a href="{{ url('/order/create') }}" class="btn btn-success btn-xs" title="Add New order">
                             <i class="fa fa-plus" aria-hidden="true"></i> Yeni sifariş
                         </a>
                         @endhasanyrole
@@ -21,12 +21,12 @@
                         
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
-                            <a href="{{ url('/user-order') }}" class="btn btn-danger btn-sm">
+                            <a href="{{ url('/order') }}" class="btn btn-danger btn-sm">
                                 <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
                             </a>
                         </div>
                         
-                        <form action="{{route('user-order.index')}}" method="get">
+                        <form action="{{route('order.index')}}" method="get">
                             <div class="col-md-10">
                                 <div class="col-md-2">
                                     <label class="col-md-4 control-label">Müştəri</label>
@@ -153,19 +153,19 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ url('/user-order/' . $item->id) }}" title="View order">
+                                            <a href="{{ url('/order/' . $item->id) }}" title="View order">
                                                 <button class="btn btn-info btn-xs"><i class="fa fa-eye"
                                                                                        aria-hidden="true"></i> View
                                                 </button>
                                             </a>
-                                            <a href="{{ url('/user-order/' . $item->id . '/edit') }}" title="Edit order">
+                                            <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order">
                                                 <button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"
                                                                                           aria-hidden="true"></i> Edit
                                                 </button>
                                             </a>
 
                                             @hasanyrole($adminAndSales)
-                                            <form method="POST" action="{{ url('/user-order' . '/' . $item->id) }}"
+                                            <form method="POST" action="{{ url('/order' . '/' . $item->id) }}"
                                                   accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}

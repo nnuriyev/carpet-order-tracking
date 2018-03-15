@@ -39,20 +39,20 @@ $adminAndSales = 'admin|sales';
                                     @hasanyrole($adminAndSales)
                                     <tr>
                                         <th> Müştəri</th>
-                                        <td> {{ $order->customer->full_name }} </td>
+                                        <td> {{ isset($order->customer)? $order->customer->full_name : null }} </td>
                                     </tr>
                                     @endhasanyrole
                                     <tr>
                                         <th> Məhsul</th>
-                                        <td> {{ $order->product->code . ' - ' . $order->product->name }} </td>
+                                        <td> {{ isset($order->product) ? $order->product->code . ' - ' . $order->product->name : null}} </td>
                                     </tr>
                                     <tr>
                                         <th> Çərçivə</th>
-                                        <td> {{ $order->frame->code . ' - ' . $order->frame->name }} </td>
+                                        <td> {{ isset($order->frame)? $order->frame->code . ' - ' . $order->frame->name : null }} </td>
                                     </tr>
                                     <tr>
                                         <th> Çanta</th>
-                                        <td> {{ $order->case->code . ' - ' . $order->case->name }} </td>
+                                        <td> {{ isset($order->case)? $order->case->code . ' - ' . $order->case->name : null }} </td>
                                     </tr>
                                     @hasanyrole('admin|workshop')
                                     <tr>

@@ -42,7 +42,7 @@
         {!! $errors->first('case_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group {{ $errors->has('paid_cash') ? 'has-error' : ''}}">
+{{--<div class="form-group {{ $errors->has('paid_cash') ? 'has-error' : ''}}">
     <label for="paid_cash" class="col-md-4 control-label">{{ 'Ödənilmış məbləğ(Nağd)' }}</label>
     <div class="col-md-6">
         <input class="form-control" name="paid_cash" type="text" id="paid_cash"
@@ -65,7 +65,7 @@
                value="{{ $order->paid_online or 0}}">
         {!! $errors->first('paid_online', '<p class="help-block">:message</p>') !!}
     </div>
-</div>
+</div>--}}
 <div class="form-group {{ $errors->has('discount_amount') ? 'has-error' : ''}}">
     <label for="discount_amount" class="col-md-4 control-label">{{ 'Endirim məbləği' }}</label>
     <div class="col-md-6">

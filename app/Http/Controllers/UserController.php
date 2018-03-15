@@ -109,8 +109,9 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->product_category_id = $request->product_category_id;
-
             $user->save();
+
+            $user->assignRole($request->role);
         } else {
             $user->update($request->except('password'));
         }

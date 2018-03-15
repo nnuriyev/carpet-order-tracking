@@ -41,9 +41,9 @@ Route::group(['middleware'=>'auth'], function (){
         'OrderController@addPayment')->name('addPayment');
 
     Route::get('/test', function (){
-        $user = Auth::user();
+        //$user = Auth::user();
         //$user->assignRole('admin');
-        dd($user->getRoleNames());
+        //dd($user->getRoleNames());
     });
 });
 

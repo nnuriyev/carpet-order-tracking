@@ -385,6 +385,9 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+
+
+    
     /*public function deletePayment($id)
     {
         CustomerPayment::destroy($id);

@@ -29,7 +29,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('product-category', 'ProductCategoryController');
     Route::resource('product', 'ProductController');
     Route::resource('customer', 'CustomerController');
-    Route::resource('user-order', 'OrderController');
+    Route::resource('order', 'OrderController');
     Route::get('current-order', 'OrderController@currentOrders')->name('currentOrders');
     Route::get('order/invoice/{id}', 'OrderController@invoice')->name('orderInvoice');
 

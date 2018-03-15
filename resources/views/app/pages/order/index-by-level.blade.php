@@ -38,6 +38,7 @@
                                         <th>Status</th>
                                         @endhasanyrole
 
+                                        <th>Mərhələ</th>
                                         <th>Şəkil</th>
                                         <th>Eskiz</th>
                                         <th>Əməliyyatlar</th>
@@ -49,11 +50,11 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         @hasanyrole($adminAndSales)
-                                        <td>{{ $item->customer->full_name }}</td>
+                                        <td>{{ isset($item->customer) ? $item->customer->full_name : null }}</td>
                                         @endhasanyrole
-                                        <td>{{ $item->product->name }}</td>
-                                        <td>{{ $item->frame->name }}</td>
-                                        <td>{{ $item->case->name }}</td>
+                                        <td>{{ isset($item->product) ? $item->product->name : null }}</td>
+                                        <td>{{ isset($item->frame) ? $item->frame->name : null }}</td>
+                                        <td>{{ isset($item->case) ? $item->case->name : null }}</td>
                                         @hasanyrole('admin|workshop')
                                         <td>{{ $item->product_cost }}</td>
                                         <td>{{ $item->cargo_cost }}</td>
@@ -62,8 +63,9 @@
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
-                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
+                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>                                        
                                         @endhasanyrole
+                                        <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>
                                             @if(!is_null($item->image))
                                                 <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default" download>

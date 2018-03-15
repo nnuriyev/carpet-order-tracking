@@ -171,17 +171,28 @@ class OrderController extends Controller
         $requestData['user_id'] = Auth::user()->id;
 
         $product = Product::findOrFail($request->product_id);
-        $frame = Product::findOrFail($request->frame_id);
-        $case = Product::findOrFail($request->case_id);
+        
+        $framePrace = 0;
+        if($request->has('frame_id')){
+ 			$frame = Product::findOrFail($request->frame_id);
+ 			$framePrace = $frame->price;
+        }
 
+        $casePrace = 0;
+        if($request->has('case_id')){
+        	$case = Product::findOrFail($request->case_id);
+        	$casePrace = $case->price;
+        }
+       
         $productPrice = $product->price;
-        $framePrace = $request->has('frame_id') ? $frame->price : 0;
-        $casePrace = $request->has('case_id') ? $case->price : 0;
-
+   
         $requestData['price'] = $productPrice + $framePrace + $casePrace;
         $requestData['product_cost'] = $product->cost;
-        $requestData['frame_cost'] = $frame->cost;
-        $requestData['case_cost'] = $case->cost;
+        $requestData['frame_cost'] = isset($frame->cost) ? $frame->cost : 0;
+        $requestData['case_cost'] = isset($case->cost) ? $case->cost : 0;
+        $requestData['paid_cash'] = 0;
+        $requestData['paid_online'] = 0;
+        $requestData['paid_terminal'] = 0;
 
         if($request->file('image')){
             $requestData['image'] =  FileUploader::upload('image','public/order_images/');

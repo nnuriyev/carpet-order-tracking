@@ -40,6 +40,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::post('order/payment/add/{orderId}',
         'OrderController@addPayment')->name('addPayment');
 
+    Route::resource('general-cost', 'GeneralCostController');
+
     Route::get('/test', function (){
         //$user = Auth::user();
         //$user->assignRole('admin');

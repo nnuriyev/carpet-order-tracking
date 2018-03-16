@@ -23,6 +23,9 @@
             <li>
                 <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
             </li>
+            <li>
+                <a href="{{route('general-cost.index')}}"><i class="fa fa-money"></i>Xərclər</a>
+            </li>
             @endrole
             @role('sales')
             <li>
@@ -36,6 +39,9 @@
             </li>
             <li>
                 <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
+            </li>
+            <li>
+                <a href="{{route('general-cost.index')}}"><i class="fa fa-money"></i>Xərclər</a>
             </li>
             @endrole
             @role('workshop')

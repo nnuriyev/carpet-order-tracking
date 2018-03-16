@@ -26,3 +26,8 @@ php artisan crud:view order --fields="customer_id#select#options={'1': 'a', '2':
                                       status#select#options={'1': 'a', '2':'b'};
                                       note#text" --view-path="app/pages"
 ===========
+
+
+php artisan crud:controller GeneralCostController --crud-name=generalCost --model-name=GeneralCost --view-path="app/pages"
+php artisan crud:view generalCost --fields="type#select#options=1,2; amount#string; note#text" --view-path="app/pages"
+===========

@@ -19,4 +19,8 @@ class CustomerPayment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function typeName(){
+        return config('staticData')['paymentType'][$this->type];
+    }
 }

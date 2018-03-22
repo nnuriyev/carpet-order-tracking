@@ -27,7 +27,10 @@ php artisan crud:view order --fields="customer_id#select#options={'1': 'a', '2':
                                       note#text" --view-path="app/pages"
 ===========
 
-
 php artisan crud:controller GeneralCostController --crud-name=generalCost --model-name=GeneralCost --view-path="app/pages"
 php artisan crud:view generalCost --fields="type#select#options=1,2; amount#string; note#text" --view-path="app/pages"
+===========
+
+php artisan crud:controller WorkshopDebtController --crud-name=workshopDebt --model-name=WorkshopDebt --view-path="app/pages"
+php artisan crud:view workshopDebt --fields="workshop_id#select#options=1,2; order_id#select#options=1,2; debt#string; paid#string" --view-path="app/pages"
 ===========

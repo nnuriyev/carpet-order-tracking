@@ -12,6 +12,7 @@ use App\OrderLevel;
 use App\Product;
 use App\ProductCategory;
 use App\Uploader\FileUploader;
+use App\WorkshopDebt;
 
 use App\User;
 use App\UserRole;
@@ -300,12 +301,6 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        
-
-
-
-
         $requestData = $request->all();
         $order = Order::findOrFail($id);
 
@@ -345,28 +340,67 @@ class OrderController extends Controller
 
     public function attachOrderLevel(Request $request, $orderId)
     {
+    
         $order = Order::findOrFail($orderId);
         $order->last_order_level_id = $request->order_level_id;
         $order->save();
-
-        $order->orderLevels()->attach($request->order_level_id,
-            [
+    
+        $order->orderLevels()->attach($request->order_level_id,[
                 'user_id' => Auth::user()->id,
                 'due_date' => $request->due_date,
                 'note' => $request->note,
                 'created_at' => Carbon::now()
-            ]);
+        ]);
 
-        return redirect()->back();
+        $level = OrderLevel::findOrFail($request->order_level_id);
+        $user = Auth::user();
+        if($level->key == 'emalatxanadan_cixdi' && $user->roles->first()->name == 'workshop'){
+            $workshopDebt = WorkshopDebt::where([
+                ['order_id', '=', $order->id],
+                ['workshop_id', '=', $user->id],
+                ['debt', '!=', null],
+            ])->first();
+
+            $debtAmount = $order->product_cost + $order->cargo_cost;
+
+            if($workshopDebt != null){
+                $workshopDebt->debt = $debtAmount;
+            }else{
+                $workshopDebt = new WorkshopDebt();
+                $workshopDebt->workshop_id = $user->id;
+                $workshopDebt->order_id = $order->id;
+                $workshopDebt->debt = $debtAmount;
+                $workshopDebt->save();
+            }
+        }
+
+        return redirect('order/'. $order->id);
     }
+
+
+    
 
     public function updateCargoCost(Request $request, $orderId)
     {
         $order = Order::findOrFail($orderId);
+        $old_cargo_cost = $order->cargo_cost;
         $order->cargo_cost = $request->cargo_cost;
         $order->save();
 
-        return redirect()->back();
+        $user = Auth::user();
+        $workshopDebt = WorkshopDebt::where([
+            ['order_id', '=', $order->id],
+            ['workshop_id', '=', $user->id],
+            ['debt', '!=', null],
+        ])->first();
+
+        if($workshopDebt != null){
+            $debtAmount = $workshopDebt->debt - $old_cargo_cost + $order->cargo_cost;
+            $workshopDebt->debt = $debtAmount;
+            $workshopDebt->save();
+        }
+
+        return redirect('order/'. $order->id);
     }
 
     /**

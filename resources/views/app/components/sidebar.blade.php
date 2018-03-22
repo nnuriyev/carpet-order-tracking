@@ -26,6 +26,12 @@
             <li>
                 <a href="{{route('general-cost.index')}}"><i class="fa fa-money"></i>Xərclər</a>
             </li>
+            <li>
+                <a href="{{route('workshop-debt.index')}}"><i class="fa fa-pie-chart"></i>Emalatxana hesabatı</a>
+            </li>
+            <li>
+                <a href="{{route('customerPayment.index')}}"><i class="fa fa-usd"></i>Maliyyə hesabatı</a>
+            </li>
             @endrole
             @role('sales')
             <li>
@@ -43,11 +49,16 @@
             <li>
                 <a href="{{route('general-cost.index')}}"><i class="fa fa-money"></i>Xərclər</a>
             </li>
+            <li>
+                <a href="{{route('customerPayment.index')}}"><i class="fa fa-usd"></i>Maliyyə hesabatı</a>
+            </li>
             @endrole
             @role('workshop')
-
             <li>
                 <a href="{{route('currentOrders')}}"><i class="fa fa-cart-arrow-down"></i>Prosesdə olan sifarişlər</a>
+            </li>
+            <li>
+                <a href="{{route('workshop-debt.index')}}"><i class="fa fa-pie-chart"></i>Emalatxana hesabatı</a>
             </li>
             @endrole
         </ul>

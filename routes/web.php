@@ -30,8 +30,10 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('product', 'ProductController');
     Route::resource('customer', 'CustomerController');
     Route::resource('order', 'OrderController');
+    Route::resource('workshop-debt', 'WorkshopDebtController');
     Route::get('current-order', 'OrderController@currentOrders')->name('currentOrders');
     Route::get('order/invoice/{id}', 'OrderController@invoice')->name('orderInvoice');
+    Route::get('customer-payment', 'CustomerPaymentController@index')->name('customerPayment.index');
 
     Route::post('order/attach-order-level/{orderId}',
         'OrderController@attachOrderLevel')->name('attachOrderLevel');

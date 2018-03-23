@@ -29,14 +29,14 @@ return [
         3=>'Terminal'
     ],
     'costType'=>[
-        0 => 'Taksi',
-        1 => 'Su',
-        2 => 'Dərzi',
-        3 => 'Fotoshop',
-        4 => 'Tel/İnternet',
-        5 => 'Ofisdaxili',
-        6 => 'Paypal',
-        7 => 'Digər'
+        1 => 'Taksi',
+        2 => 'Su',
+        3 => 'Dərzi',
+        4 => 'Fotoshop',
+        5 => 'Tel/İnternet',
+        6 => 'Ofisdaxili',
+        7 => 'Paypal',
+        8 => 'Digər'
     ]
 
 ];

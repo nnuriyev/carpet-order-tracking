@@ -15,15 +15,26 @@ class GeneralCostController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request, GeneralCost $generalcost)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
+        if($request->has('type') && !is_null($request->type)){
+            $generalcost = $generalcost->where('type', $request->type);
+        }
 
-        if (!empty($keyword)) {
-            $generalcost = GeneralCost::paginate($perPage);
-        } else {
-            $generalcost = GeneralCost::paginate($perPage);
+        if($request->has('date_from') && !is_null($request->date_from)){
+            $generalcost = $generalcost->where('created_at','>=', $request->date_from);
+        }
+
+        if($request->has('date_to') && !is_null($request->date_to)){
+            $generalcost = $generalcost->where('created_at','<=', $request->date_to . ' 23:59:59');
+        } 
+
+
+        $perPage = 100;
+        $generalcost = $generalcost->orderBy('id', 'desc')->paginate($perPage);
+        
+        if(count($request->all()) > 0 ){
+            $generalcost->appends(request()->query())->links();
         }
 
         return view('app/pages.general-cost.index', compact('generalcost'));

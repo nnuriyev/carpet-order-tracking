@@ -2,10 +2,10 @@
     <label for="type" class="col-md-4 control-label">Tip</label>
     <div class="col-md-6">
         <select name="type" class="form-control" id="type" >
-    @foreach (config('staticData')['costType'] as $optionKey => $optionValue)
-        <option value="{{ $optionKey }}" {{ (isset($generalcost->type) && $generalcost->type == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
-    @endforeach
-</select>
+        @foreach (config('staticData')['costType'] as $optionKey => $optionValue)
+            <option value="{{ $optionKey }}" {{ (isset($generalcost->type) && $generalcost->type == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+        @endforeach
+        </select>
         {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('amount') ? 'has-error' : ''}}">

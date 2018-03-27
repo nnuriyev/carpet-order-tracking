@@ -24,6 +24,7 @@
     <label for="frame_id" class="col-md-4 control-label">{{ 'Çərçivə' }}</label>
     <div class="col-md-6">
         <select name="frame_id" class="form-control js-example-basic-single" id="frame_id">
+                <option value="">Yoxdur</option>
             @foreach ($frameList as $optionKey => $optionValue)
                 <option value="{{ $optionKey }}" {{ (isset($order->frame_id) && $order->frame_id == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
             @endforeach
@@ -35,6 +36,7 @@
     <label for="case_id" class="col-md-4 control-label">{{ 'Çanta' }}</label>
     <div class="col-md-6">
         <select name="case_id" class="form-control js-example-basic-single" id="case_id">
+                <option value="">Yoxdur</option>
             @foreach ($casesList as $optionKey => $optionValue)
                 <option value="{{ $optionKey }}" {{ (isset($order->case_id) && $order->case_id == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
             @endforeach

@@ -174,13 +174,13 @@ class OrderController extends Controller
         $product = Product::findOrFail($request->product_id);
         
         $framePrace = 0;
-        if($request->has('frame_id')){
+        if($request->has('frame_id') && !is_null($request->frame_id)){
  			$frame = Product::findOrFail($request->frame_id);
  			$framePrace = $frame->price;
         }
 
         $casePrace = 0;
-        if($request->has('case_id')){
+        if($request->has('case_id') && !is_null($request->case_id)){
         	$case = Product::findOrFail($request->case_id);
         	$casePrace = $case->price;
         }
@@ -307,13 +307,13 @@ class OrderController extends Controller
         $product = Product::findOrFail($request->product_id);
         
         $framePrace = 0;
-        if($request->has('frame_id')){
+        if($request->has('frame_id') && !is_null($request->frame_id)){
  			$frame = Product::findOrFail($request->frame_id);
  			$framePrace = $frame->price;
         }
 
         $casePrace = 0;
-        if($request->has('case_id')){
+        if($request->has('case_id') && !is_null($request->case_id)){
         	$case = Product::findOrFail($request->case_id);
         	$casePrace = $case->price;
         }
@@ -335,7 +335,7 @@ class OrderController extends Controller
 
         $order->update($requestData);
 
-        return redirect('order')->with('flash_message', 'Order updated!');
+        return redirect('order/'.$id)->with('flash_message', 'Order updated!');
     }
 
     public function attachOrderLevel(Request $request, $orderId)

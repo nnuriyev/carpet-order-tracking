@@ -68,15 +68,15 @@
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>
                                             @if(!is_null($item->image))
-                                                <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default" download>
-                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                                <a href="{{Storage::url($item->image)}}" download>
+                                                    <img height="50" src="{{ url('/') . '/resizer.php?src=' . Storage::url($item->image) .'&zc=3&w=50&h=50'}}">
                                                 </a>
                                             @endif
                                         </td>
                                         <td>
                                             @if(!is_null($item->sketch))
-                                                <a href="{{Storage::url($item->sketch)}}" class="btn btn-xs btn-default">
-                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                                <a href="{{Storage::url($item->sketch)}}" download>
+                                                    <img height="50" src="{{url('/').'/resizer.php?src='. Storage::url($item->sketch) .'&zc=3&w=50&h=50'}}">
                                                 </a>
                                             @endif
                                         </td>

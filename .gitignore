@@ -1,10 +1,14 @@
 /node_modules
 /public/hot
+/public/cache
 /public/storage
+/public/error_log
+/public/.error_log.swp
 /storage/*.key
 /vendor
 /.idea
 /.vagrant
+/.vscode
 /node_modules
 Homestead.json
 Homestead.yaml
@@ -16,3 +20,5 @@ yarn-error.log
 *.DS_Store
 .AppleDouble
 .LSOverride
+
+

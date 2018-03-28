@@ -66,6 +66,14 @@ class OrderController extends Controller
             $orders = $orders->where('last_order_level_id', $operator, null);
         }
 
+        if($request->has('date_from') && !is_null($request->date_from)){
+            $orders = $orders->where('created_at','>=', $request->date_from);
+        }
+
+        if($request->has('date_to') && !is_null($request->date_to)){
+            $orders = $orders->where('created_at','<=', $request->date_to . ' 23:59:59');
+        }
+
         $perPage = 100;
         $orders = $orders->orderBy('id', 'desc')->paginate($perPage);
 
@@ -194,6 +202,7 @@ class OrderController extends Controller
         $requestData['paid_cash'] = 0;
         $requestData['paid_online'] = 0;
         $requestData['paid_terminal'] = 0;
+        $requestData['status'] = 0;
 
         if($request->file('image')){
             $requestData['image'] =  FileUploader::upload('image','public/order_images/');
@@ -354,6 +363,13 @@ class OrderController extends Controller
 
         $level = OrderLevel::findOrFail($request->order_level_id);
         $user = Auth::user();
+        if($level->key == 'tehvil_verildi'){
+            $order->status = 2;//Sifarish tamamlandi
+        }else{
+            $order->status = 1;//Prosesde
+        }
+        $order->save();
+
         if($level->key == 'emalatxanadan_cixdi' && $user->roles->first()->name == 'workshop'){
             $workshopDebt = WorkshopDebt::where([
                 ['order_id', '=', $order->id],

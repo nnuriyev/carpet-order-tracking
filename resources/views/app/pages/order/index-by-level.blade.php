@@ -35,6 +35,7 @@
                                         <th>Qiymət</th>
                                         <th>Ödənilmış məbləğ</th>
                                         <th>Endirim məbləği</th>
+                                        <th>Ödənilməli məbləğ</th>
                                         <th>Status</th>
                                         @endhasanyrole
 
@@ -63,7 +64,8 @@
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
-                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>                                        
+                                        <td>{{ $item->restOfAmount() }}</td>
+                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         @endhasanyrole
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>

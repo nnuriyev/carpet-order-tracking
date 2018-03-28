@@ -41,7 +41,7 @@ class WorkshopDebtController extends Controller
 
         if($request->has('date_to') && !is_null($request->date_to)){
             $workshopdebt = $workshopdebt->where('created_at','<=', $request->date_to . ' 23:59:59');
-        } 
+        }
 
 
         $perPage = 100;

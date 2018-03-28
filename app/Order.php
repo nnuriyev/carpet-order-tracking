@@ -86,6 +86,11 @@ class Order extends Model
         return $this->paid_cash + $this->paid_terminal + $this->paid_online;
     }
 
+    public function restOfAmount()
+    {
+        return $this->price - $this->discount_amount - $this->totalPaidAmount();
+    }
+
     public function statusName(){
         return config('staticData')['orderStatus'][$this->status];
     }

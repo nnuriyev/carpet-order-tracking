@@ -69,6 +69,14 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Tarix(Başlanğıc)</label>
+                                    <input class="form-control" name="date_from" type="date" value="{{request('date_from')}}">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Tarix(Bitmə)</label>
+                                    <input class="form-control" name="date_to" type="date" value="{{request('date_to')}}">
+                                </div>
                             </div>
 
                             <div class="col-md-1">
@@ -102,12 +110,12 @@
                                     <th>Qiymət</th>
                                     <th>Ödənilmış məbləğ</th>
                                     <th>Endirim məbləği</th>
+                                    <th>Ödənilməli məbləğ</th>
                                     <th>Status</th>
                                     @endhasanyrole
 
                                     <th>Mərhələ</th>
-                                    <th>Şəkil</th>
-                                    <th>Eskiz</th>
+                                    <th>Tarix</th>
 
                                     @hasanyrole($adminAndSales)
                                     <th>Əməliyyatlar</th>
@@ -133,25 +141,11 @@
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
+                                        <td>{{ $item->restOfAmount() }}</td>
                                         <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         @endhasanyrole
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
-                                        <td>
-                                            @if(!is_null($item->image))
-                                                <a href="{{Storage::url($item->image)}}" class="btn btn-xs btn-default"
-                                                   download>
-                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                </a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if(!is_null($item->sketch))
-                                                <a href="{{Storage::url($item->sketch)}}"
-                                                   class="btn btn-xs btn-default">
-                                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                </a>
-                                            @endif
-                                        </td>
+                                        <td>{{ $item->created_at }}</td>
                                         <td>
                                             <a href="{{ url('/order/' . $item->id) }}" title="View order">
                                                 <button class="btn btn-info btn-xs"><i class="fa fa-eye"

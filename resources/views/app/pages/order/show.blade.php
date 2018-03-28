@@ -15,9 +15,9 @@ $adminAndSales = 'admin|sales';
 
                         <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         @hasanyrole($adminAndSales)
-                        @if($order->status == 2)
+
                             <a href="{{ url('/order/invoice/' . $order->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-paperclip" aria-hidden="true"></i> Invoice</button></a>
-                        @endif
+
                         @endhasanyrole
                         <a href="{{ url('/order/' . $order->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         @hasanyrole($adminAndSales)
@@ -70,12 +70,16 @@ $adminAndSales = 'admin|sales';
                                         <td> {{ $order->price }} AZN</td>
                                     </tr>
                                     <tr>
+                                        <th> Endirim məbləği</th>
+                                        <td> {{ $order->discount_amount }} AZN</td>
+                                    </tr>
+                                    <tr class="green">
                                         <th> Ödənilmış məbləğ</th>
                                         <td> {{ $order->totalPaidAmount() }} AZN</td>
                                     </tr>
-                                    <tr>
-                                        <th> Endirim məbləği</th>
-                                        <td> {{ $order->discount_amount }} AZN</td>
+                                    <tr class="red">
+                                        <th> Ödənilməli məbləğ</th>
+                                        <td> {{ $order->restOfAmount() }} AZN</td>
                                     </tr>
                                     <tr>
                                         <th> Status</th>

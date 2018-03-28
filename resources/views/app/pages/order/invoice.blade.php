@@ -116,18 +116,23 @@ $adminAndSales = 'admin|sales';
                                             </tr>
                                             <tr>
                                                 <th>Endirim:</th>
-                                                <td>-{{$order->discount_amount != null ? $order->discount_amount : 0}} AZN</td>
+                                                <td>{{$order->discount_amount != null ? $order->discount_amount : 0}} AZN</td>
                                             </tr>
                                             <tr>
                                                 <th>Yekun qiymət:</th>
-                                                <td>{{$order->price}} AZN</td>
+                                                <td>{{$order->price - $order->discount_amount}} AZN</td>
                                             </tr>
                                             <tr>
                                                 <th>Ödənilib:</th>
                                                 <td><b>{{$order->paid_cash +
                                                  $order->paid_online +
                                                  $order->paid_terminal }} AZN</b></td>
-                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Borc:</th>
+                                                <td><b>{{$order->restOfAmount() }} AZN</b></td>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>

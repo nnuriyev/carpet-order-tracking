@@ -76,6 +76,7 @@
         {!! $errors->first('discount_amount', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+{{--@if(isset($order))
 <div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
     <label for="status" class="col-md-4 control-label">{{ 'Status' }}</label>
     <div class="col-md-6">
@@ -87,7 +88,7 @@
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-
+@endif--}}
 <div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
     <label for="image" class="col-md-4 control-label">{{ 'Şəkil' }}</label>
     <div class="col-md-6">

@@ -75,8 +75,8 @@ $adminAndSales = 'admin|sales';
                                         <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>{{$order->product->name}}</td>
-                                            <td>{{$order->product->code}}</td>
+                                            <td>{{isset($order->product)? $order->product->name : null}}</td>
+                                            <td>{{isset($order->product)? $order->product->code : null}}</td>
                                         </tr>
                                         @if(isset($order->frame) && $order->frame_id != null )
                                         <tr>

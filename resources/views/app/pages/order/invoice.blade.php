@@ -75,20 +75,20 @@ $adminAndSales = 'admin|sales';
                                         <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>{{isset($order->product)? $order->product->name : null}}</td>
+                                            <td>{{isset($order->product)? $order->product->category->name .' - '. $order->product->name : null}}</td>
                                             <td>{{isset($order->product)? $order->product->code : null}}</td>
                                         </tr>
                                         @if(isset($order->frame) && $order->frame_id != null )
                                         <tr>
                                             <td>1</td>
-                                            <td>{{ $order->frame->name }}</td>
+                                            <td>{{ $order->frame->category->name .' - '. $order->frame->name }}</td>
                                             <td>{{$order->frame->code}}</td>
                                         </tr>
                                         @endif
                                         @if(isset($order->case) && $order->case_id != null )
                                             <tr>
                                                 <td>1</td>
-                                                <td>{{ $order->case->name }}</td>
+                                                <td>{{ $order->case->category->name .' - '. $order->case->name }}</td>
                                                 <td>{{$order->case->code}}</td>
                                             </tr>
                                         @endif

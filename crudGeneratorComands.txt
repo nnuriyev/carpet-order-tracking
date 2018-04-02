@@ -34,3 +34,7 @@ php artisan crud:view generalCost --fields="type#select#options=1,2; amount#stri
 php artisan crud:controller WorkshopDebtController --crud-name=workshopDebt --model-name=WorkshopDebt --view-path="app/pages"
 php artisan crud:view workshopDebt --fields="workshop_id#select#options=1,2; order_id#select#options=1,2; debt#string; paid#string" --view-path="app/pages"
 ===========
+
+php artisan crud:controller OrderImageController --crud-name=orderImage --model-name=OrderImage --view-path="app/pages"
+php artisan crud:view orderImage --fields="order_id#select#options=1,2; image#file; order_id#select#options=1,2; paid#string" --view-path="app/pages"
+===========

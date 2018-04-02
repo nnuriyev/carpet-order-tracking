@@ -22,6 +22,11 @@ class Order extends Model
         return $this->hasMany('App\CustomerPayment');
     }
 
+    public function images()
+    {
+        return $this->hasMany('App\OrderImage');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

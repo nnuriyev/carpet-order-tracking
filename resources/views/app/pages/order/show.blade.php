@@ -115,6 +115,38 @@ $adminAndSales = 'admin|sales';
 
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Şəkilər və eskizlər</div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Şəkil</th>
+                                    <th>Daxil edilmə tarixi</th>
+                                    <th>Tamamlanma tarixi</th>
+                                    <th>Qeyd</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($order->orderLevels as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->pivot->created_at }}</td>
+                                        <td>{{ $item->pivot->due_date }}</td>
+                                        <td>{{ $item->pivot->note }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="panel panel-default">
                     <div class="panel-heading">Sifariş mərhələləri</div>
                     <div class="panel-body">
@@ -142,7 +174,6 @@ $adminAndSales = 'admin|sales';
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
 

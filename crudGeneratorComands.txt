@@ -36,5 +36,5 @@ php artisan crud:view workshopDebt --fields="workshop_id#select#options=1,2; ord
 ===========
 
 php artisan crud:controller OrderImageController --crud-name=orderImage --model-name=OrderImage --view-path="app/pages"
-php artisan crud:view orderImage --fields="order_id#select#options=1,2; image#file; order_id#select#options=1,2; paid#string" --view-path="app/pages"
+php artisan crud:view orderImage --fields="order_id#select#options=1,2; image#file; type#select#options=1,2; status#select#options=1,2; note#text" --view-path="app/pages"
 ===========

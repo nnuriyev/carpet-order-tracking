@@ -89,7 +89,7 @@
     </div>
 </div>
 @endif--}}
-<div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
+{{--<div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
     <label for="image" class="col-md-4 control-label">{{ 'Şəkil' }}</label>
     <div class="col-md-6">
         <input class="form-control" name="image" type="file" id="image">
@@ -104,7 +104,7 @@
         {!! $errors->first('sketch', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-@endif
+@endif--}}
 
 <div class="form-group {{ $errors->has('note') ? 'has-error' : ''}}">
     <label for="note" class="col-md-4 control-label">{{ 'Qeyd' }}</label>

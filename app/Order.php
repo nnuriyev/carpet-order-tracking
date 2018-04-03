@@ -27,6 +27,28 @@ class Order extends Model
         return $this->hasMany('App\OrderImage');
     }
 
+    public function getImage()
+    {
+        $image = $this->images->where('status', true)->first();
+        if($image != null){
+            return $image->image;
+        }
+        $image = $this->images->first();
+        if($image != null){
+            return $image->image;
+        }
+    }
+    public function getSketch(){
+        $sketch = $this->images->where('status', true)->first();
+        if($sketch != null){
+            return $sketch->sketch;
+        }
+        $sketch = $this->images->first();
+        if($sketch != null){
+            return $sketch->sketch;
+        }
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

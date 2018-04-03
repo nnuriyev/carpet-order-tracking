@@ -90,25 +90,6 @@ $adminAndSales = 'admin|sales';
                                         <th> Qeyd</th>
                                         <td> {{ $order->note }} </td>
                                     </tr>
-                                    <tr>
-                                        <th> Şəkil</th>
-                                        <td>
-                                            <a href="{{Storage::url($order->image)}}" download>
-                                                <img src="{{Storage::url($order->image)}}" height="150">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Eskiz</th>
-                                        <td>
-                                            @if(!is_null($order->sketch))
-                                            <a href="{{Storage::url($order->sketch)}}" download>
-                                                <img src="{{Storage::url($order->sketch)}}" height="150">
-                                            </a>
-                                            @endif
-                                        </td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -117,27 +98,50 @@ $adminAndSales = 'admin|sales';
                 </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Şəkilər və eskizlər</div>
+                    <div class="panel-heading">
+                        Şəkilər və eskizlər
+                        @hasanyrole($adminAndSales)
+                        <a href="{{ url('/order-image/'.$order->id.'/create') }}" title="Yeni şəkil"><button class="btn btn-success btn-xs"><i class="fa fa-plus" aria-hidden="true"></i> Yeni şəkil</button></a>
+                        @endhasanyrole
+                    </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Tarix</th>
                                     <th>Şəkil</th>
-                                    <th>Daxil edilmə tarixi</th>
-                                    <th>Tamamlanma tarixi</th>
+                                    <th>Eskiz</th>
                                     <th>Qeyd</th>
+                                    <th>Status</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order->orderLevels as $item)
+                                @foreach($order->images as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->pivot->created_at }}</td>
-                                        <td>{{ $item->pivot->due_date }}</td>
-                                        <td>{{ $item->pivot->note }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            @if(!is_null($item->image))
+                                            <a href="{{Storage::url($item->image)}}" download>
+                                                <img src="{{Storage::url($item->image)}}" height="70">
+                                            </a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(!is_null($item->sketch))
+                                            <a href="{{Storage::url($item->sketch)}}" download>
+                                                <img src="{{Storage::url($item->sketch)}}" height="70">
+                                            </a>
+                                            @endif
+                                        </td>
+                                        <td>{{ $item->note }}</td>
+                                        <td>{!! $item->status == 1 ? '<span class="green">Təsdiqlənib</span>' : '' !!}</td>
+                                        <td>
+                                            <a href="{{ url('/order-image/' . $item->id . '/edit') }}" title="Edit"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

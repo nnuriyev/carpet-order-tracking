@@ -43,7 +43,11 @@ Route::group(['middleware'=>'auth'], function (){
         'OrderController@addPayment')->name('addPayment');
 
     Route::resource('general-cost', 'GeneralCostController');
-    Route::resource('order-image/{orderId}', 'OrderImageController');
+    Route::get('order-image/{orderId}/create', 'OrderImageController@create');
+    Route::post('order-image/{orderId}', 'OrderImageController@store');
+    Route::get('order-image/{id}/edit', 'OrderImageController@edit');
+    Route::patch('order-image/{id}', 'OrderImageController@update');
+    Route::delete('order-image/{id}', 'OrderImageController@destroy');
 
     Route::get('/test', function (){
         //$user = Auth::user();

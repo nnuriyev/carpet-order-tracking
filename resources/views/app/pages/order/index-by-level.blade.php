@@ -69,16 +69,16 @@
                                         @endhasanyrole
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>
-                                            @if(!is_null($item->image))
-                                                <a href="{{Storage::url($item->image)}}" download>
-                                                    <img height="50" src="{{ url('/') . '/resizer.php?src=' . Storage::url($item->image) .'&zc=3&w=70&h=70'}}">
+                                            @if(count($item->images)>0)
+                                                <a href="{{Storage::url($item->getImage())}}" download>
+                                                    <img height="50" src="{{ url('/') . '/resizer.php?src=' . Storage::url($item->getImage()) .'&zc=3&w=70&h=70'}}">
                                                 </a>
                                             @endif
                                         </td>
                                         <td>
-                                            @if(!is_null($item->sketch))
-                                                <a href="{{Storage::url($item->sketch)}}" download>
-                                                    <img height="50" src="{{url('/').'/resizer.php?src='. Storage::url($item->sketch) .'&zc=3&w=70&h=70'}}">
+                                            @if(count($item->images)>0)
+                                                <a href="{{Storage::url($item->getSketch())}}" download>
+                                                    <img height="50" src="{{url('/').'/resizer.php?src='. Storage::url($item->getSketch()) .'&zc=3&w=70&h=70'}}">
                                                 </a>
                                             @endif
                                         </td>

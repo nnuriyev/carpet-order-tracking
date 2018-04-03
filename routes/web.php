@@ -43,6 +43,7 @@ Route::group(['middleware'=>'auth'], function (){
         'OrderController@addPayment')->name('addPayment');
 
     Route::resource('general-cost', 'GeneralCostController');
+    Route::resource('order-image/{orderId}', 'OrderImageController');
 
     Route::get('/test', function (){
         //$user = Auth::user();

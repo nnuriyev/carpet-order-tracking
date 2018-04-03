@@ -16,7 +16,8 @@ class CreateOrderImagesTable extends Migration
         Schema::create('order_images', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned()->index();
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->string('sketch')->nullable();
             $table->tinyInteger('type'); //1=>image; 2=>sketch
             $table->boolean('status')->default(false); //1=>tesdiqlenib
             $table->text('note');

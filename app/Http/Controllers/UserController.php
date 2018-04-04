@@ -111,7 +111,7 @@ class UserController extends Controller
             $user->product_category_id = $request->product_category_id;
             $user->save();
 
-            $user->assignRole($request->role);
+            //$user->assignRole($request->role);
         } else {
             $user->update($request->except('password'));
         }

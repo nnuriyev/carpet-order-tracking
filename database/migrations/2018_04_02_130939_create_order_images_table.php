@@ -20,7 +20,7 @@ class CreateOrderImagesTable extends Migration
             $table->string('sketch')->nullable();
             $table->tinyInteger('type'); //1=>image; 2=>sketch
             $table->boolean('status')->default(false); //1=>tesdiqlenib
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
 
             //RELATIONS

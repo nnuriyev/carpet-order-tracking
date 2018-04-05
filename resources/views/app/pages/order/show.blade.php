@@ -12,10 +12,11 @@ $adminAndSales = 'admin|sales';
                 <div class="panel panel-default">
                     <div class="panel-heading">Sifariş {{ $order->id }}</div>
                     <div class="panel-body">
-
-                        <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @role('workshop')
+                            <a href="{{ url('/current-order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @endrole
                         @hasanyrole($adminAndSales)
-
+                            <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                             <a href="{{ url('/order/invoice/' . $order->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-paperclip" aria-hidden="true"></i> Invoice</button></a>
 
                         @endhasanyrole
@@ -181,6 +182,7 @@ $adminAndSales = 'admin|sales';
                     </div>
                 </div>
 
+                @hasanyrole($adminAndSales)
                 <div class="panel panel-default">
                     <div class="panel-heading">Sifariş ödənişləri</div>
                     <div class="panel-body">
@@ -206,9 +208,9 @@ $adminAndSales = 'admin|sales';
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
+                @endhasanyrole
             </div>
         </div>
     </div>

@@ -12,7 +12,11 @@ $adminAndSales = 'admin|sales';
                 <div class="panel panel-default">
                     <div class="panel-heading">Sifariş mərhələləri</div>
                     <div class="panel-body">
-                        <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @role('workshop')
+                            <a href="{{ url('/current-order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @else
+                            <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @endrole
                         <br />
                         <br />
 
@@ -32,7 +36,11 @@ $adminAndSales = 'admin|sales';
                 <div class="panel panel-default">
                     <div class="panel-heading">Kargo xərci</div>
                     <div class="panel-body">
-                        <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @role('workshop')
+                            <a href="{{ url('/current-order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @else
+                            <a href="{{ url('/order') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        @endrole
                         <br />
                         <br />
 

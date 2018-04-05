@@ -91,7 +91,7 @@
                         </div>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -113,7 +113,7 @@
                                         <td>{{ $item->order_id }}</td>
                                         <td class="red">{{ $item->debt != null ? $item->debt . ' AZN': null }}</td>
                                         <td class="green">{{ $item->paid != null ? $item->paid . ' AZN': null }}</td>
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}</td>
                                         @role('admin')
                                         <td>
                                             @if($item->paid != null)

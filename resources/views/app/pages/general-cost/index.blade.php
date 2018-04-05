@@ -63,7 +63,7 @@
                         </div>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -81,7 +81,7 @@
                                         <td>{{ $item->typeName() }}</td>
                                         <td class="red">{{ $item->amount }} AZN</td>
                                         <td>{{ $item->note }}</td>
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('/general-cost/' . $item->id) }}" title="View generalCost"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/general-cost/' . $item->id . '/edit') }}" title="Edit generalCost"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

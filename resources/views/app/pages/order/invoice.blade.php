@@ -55,7 +55,7 @@ $adminAndSales = 'admin|sales';
                                     <br>
                                     <b>Sifariş ID:</b> {{$order->id}}
                                     <br>
-                                    <b>Sifariş tarixi:</b> {{$order->created_at}}
+                                    <b>Sifariş tarixi:</b> {{ date('d-m-Y h:i', strtotime($order->created_at)) }}
                                 </div>
                                 <!-- /.col -->
                             </div>

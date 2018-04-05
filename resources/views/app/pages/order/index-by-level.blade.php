@@ -14,7 +14,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -23,10 +23,9 @@
                                         @endhasanyrole
 
                                         <th>Məhsul</th>
+                                        @hasanyrole('admin|workshop')
                                         <th>Çərçivə</th>
                                         <th>Çanta</th>
-
-                                        @hasanyrole('admin|workshop')
                                         <th>Maya dəyəri</th>
                                         <th>Kargo (Emalatxana)</th>
                                         @endhasanyrole

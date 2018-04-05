@@ -89,7 +89,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -145,7 +145,7 @@
                                         <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         @endhasanyrole
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('/order/' . $item->id) }}" title="View order">
                                                 <button class="btn btn-info btn-xs"><i class="fa fa-eye"

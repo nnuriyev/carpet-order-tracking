@@ -28,7 +28,7 @@
                                     <tr><th> Tip </th><td> {{ $generalcost->typeName() }} </td></tr>
                                     <tr><th> Məbləğ </th><td> {{ $generalcost->amount }} </td></tr>
                                     <tr><th> Qeyd </th><td> {{ $generalcost->note }} </td></tr>
-                                    <tr><th> Tarix </th><td> {{ $generalcost->created_at }} </td></tr>
+                                    <tr><th> Tarix </th><td> {{ date('d-m-Y h:i', strtotime($generalcost->created_at)) }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

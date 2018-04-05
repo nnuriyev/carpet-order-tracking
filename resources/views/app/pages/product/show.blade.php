@@ -20,7 +20,7 @@
                         <br/>
 
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $product->id }}</td>

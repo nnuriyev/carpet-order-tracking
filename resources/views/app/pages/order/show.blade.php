@@ -32,7 +32,7 @@ $adminAndSales = 'admin|sales';
                         <br/>
 
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $order->id }}</td>
@@ -107,7 +107,7 @@ $adminAndSales = 'admin|sales';
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -156,7 +156,7 @@ $adminAndSales = 'admin|sales';
                     <div class="panel-heading">Sifariş mərhələləri</div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -171,8 +171,8 @@ $adminAndSales = 'admin|sales';
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->pivot->created_at }}</td>
-                                        <td>{{ $item->pivot->due_date }}</td>
+                                        <td>{{ date('d-m-Y h:i', strtotime($item->pivot->created_at)) }}</td>
+                                        <td>{{ $item->pivot->due_date != null ? date('d-m-Y', strtotime($item->pivot->due_date)):null }}</td>
                                         <td>{{ $item->pivot->note }}</td>
                                     </tr>
                                 @endforeach
@@ -187,7 +187,7 @@ $adminAndSales = 'admin|sales';
                     <div class="panel-heading">Sifariş ödənişləri</div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -202,7 +202,7 @@ $adminAndSales = 'admin|sales';
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->amount }} AZN</td>
                                         <td>{{ config('staticData')['paymentType'][$item->type] }}</td>
-                                        <td>{{ $item->created_at }}
+                                        <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}
                                     </tr>
                                 @endforeach
                                 </tbody>

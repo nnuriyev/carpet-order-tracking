@@ -77,7 +77,7 @@
                         </div>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -102,7 +102,7 @@
                                         <td>{{ isset($item->order->status) ? $item->order->statusName() : null }}</td>
                                         <td class="green">{{ $item->amount . ' AZN' }}</td>
                                         <td>{{ $item->typeName() }}</td>
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }} </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

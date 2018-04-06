@@ -68,6 +68,7 @@ $adminAndSales = 'admin|sales';
                                         <thead>
                                         <tr>
                                             <th>Miqdar</th>
+                                            <th></th>
                                             <th>Məhsul</th>
                                             <th>Məhsul kodu</th>
                                         </tr>
@@ -75,12 +76,14 @@ $adminAndSales = 'admin|sales';
                                         <tbody>
                                         <tr>
                                             <td>1</td>
+                                            <td width="100"><img height="70" src="{{ url('/') . '/resizer.php?src=' . Storage::url($order->getImage()) .'&zc=3&w=70&h=70'}}"></td>
                                             <td>{{isset($order->product)? $order->product->category->name .' - '. $order->product->name : null}}</td>
                                             <td>{{isset($order->product)? $order->product->code : null}}</td>
                                         </tr>
                                         @if(isset($order->frame) && $order->frame_id != null )
                                         <tr>
                                             <td>1</td>
+                                            <td></td>
                                             <td>{{ $order->frame->category->name .' - '. $order->frame->name }}</td>
                                             <td>{{$order->frame->code}}</td>
                                         </tr>
@@ -88,6 +91,7 @@ $adminAndSales = 'admin|sales';
                                         @if(isset($order->case) && $order->case_id != null )
                                             <tr>
                                                 <td>1</td>
+                                                <td></td>
                                                 <td>{{ $order->case->category->name .' - '. $order->case->name }}</td>
                                                 <td>{{$order->case->code}}</td>
                                             </tr>
@@ -102,7 +106,22 @@ $adminAndSales = 'admin|sales';
                             <div class="row">
                                 <!-- accepted payments column -->
                                 <div class="col-xs-6">
-
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th style="width:50%">Təhvil verilmə tarixi:</th>
+                                            <td> {{date('d.m.Y')}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>İmza:</th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-xs-6">

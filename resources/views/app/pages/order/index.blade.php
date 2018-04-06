@@ -22,7 +22,7 @@
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
                             <a href="{{ url('/order') }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Təmizlə
                             </a>
                         </div>
                         
@@ -142,7 +142,7 @@
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
                                         <td>{{ $item->restOfAmount() }}</td>
-                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
+                                        <td class="{{$item->status == 3 ? 'red':''}}">{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         @endhasanyrole
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}</td>

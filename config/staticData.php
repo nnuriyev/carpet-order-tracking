@@ -19,9 +19,10 @@ return [
     ],
 
     'orderStatus' => [
-        0 => 'Yeni sifariş',
+        0 => 'Yeni',
         1 => 'Prosesdə',
-        2 => 'Sifariş tamamlanıb'
+        2 => 'Tamamlanıb',
+        3 => 'Ləğv edilib'
     ],
     'paymentType'=>[
         1=>'Nağd',

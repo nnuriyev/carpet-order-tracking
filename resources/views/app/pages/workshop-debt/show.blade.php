@@ -25,7 +25,10 @@
                                     <tr>
                                         <th>ID</th><td>{{ $workshopdebt->id }}</td>
                                     </tr>
-                                    <tr><th> Workshop Id </th><td> {{ $workshopdebt->workshop_id }} </td></tr><tr><th> Order Id </th><td> {{ $workshopdebt->order_id }} </td></tr><tr><th> Debt </th><td> {{ $workshopdebt->debt }} </td></tr>
+                                    <tr><th> Workshop Id </th><td> {{ $workshopdebt->workshop_id }} </td></tr>
+                                    <tr><th> Order Id </th><td> {{ $workshopdebt->order_id }} </td></tr>
+                                    <tr><th> Note </th><td> {{ $workshopdebt->note }} </td></tr>
+                                    <tr><th> Debt </th><td> {{ $workshopdebt->debt }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

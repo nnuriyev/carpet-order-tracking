@@ -8,7 +8,7 @@ class WorkshopDebt extends Model
 {
     public $table = 'workshop_debt';
     public $fillable = [
-        'workshop_id','order_id', 'debt', 'paid'
+        'workshop_id','order_id', 'debt', 'paid', 'note'
     ];
 
     public function workshop()

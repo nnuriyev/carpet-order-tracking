@@ -13,7 +13,9 @@ class UpdateWorkshopDebtTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('workshop_debt', function (Blueprint $table) {
+            $table->text('note')->nullable()->after('paid');
+        });
     }
 
     /**

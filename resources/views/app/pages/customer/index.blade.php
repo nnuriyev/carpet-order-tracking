@@ -13,7 +13,7 @@
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
                             <a href="{{ url('/customer') }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Təmizlə
                             </a>
                         </div>
 
@@ -99,11 +99,13 @@
                                             <a href="{{ url('/customer/' . $item->id) }}" title="View customer"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/customer/' . $item->id . '/edit') }}" title="Edit customer"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
+                                            @role('admin')
                                             <form method="POST" action="{{ url('/customer' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-xs" title="Delete customer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
+                                            @endrole
                                         </td>
                                     </tr>
                                 @endforeach

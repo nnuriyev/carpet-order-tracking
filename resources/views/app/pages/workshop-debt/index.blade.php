@@ -18,7 +18,7 @@
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
                             <a href="{{ url('/workshop-debt') }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Təmizlə
                             </a>
                         </div>
                         
@@ -97,6 +97,7 @@
                                         <th>#</th>
                                         <th>Emalatxana</th>
                                         <th>Sifariş Id</th>
+                                        <th>Qeyd</th>
                                         <th>Borc</th>
                                         <th>Ödəniş</th>
                                         <th>Tarix</th>
@@ -111,6 +112,7 @@
                                         <td>{{ $loop->iteration or $item->id }}</td>
                                         <td>{{ $item->workshop->name }}</td>
                                         <td>{{ $item->order_id }}</td>
+                                        <td>{{ $item->note }}</td>
                                         <td class="red">{{ $item->debt != null ? $item->debt . ' AZN': null }}</td>
                                         <td class="green">{{ $item->paid != null ? $item->paid . ' AZN': null }}</td>
                                         <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}</td>

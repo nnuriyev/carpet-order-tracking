@@ -17,6 +17,13 @@
         {!! $errors->first('paid', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group {{ $errors->has('note') ? 'has-error' : ''}}">
+    <label for="note" class="col-md-4 control-label">{{ 'Qeyd' }}</label>
+    <div class="col-md-6">
+        <textarea class="form-control" rows="5" name="note" type="textarea" id="note">{{ $workshopdebt->note or ''}}</textarea>
+        {!! $errors->first('note', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">
         <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'Əlavə et' }}">

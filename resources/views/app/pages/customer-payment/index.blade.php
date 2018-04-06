@@ -13,7 +13,7 @@
                         <div class="col-md-1">
                             <label class="control-label">&nbsp;</label>
                             <a href="{{ url('/customer-payment') }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-refresh" aria-hidden="true"></i> Tməmizlə
+                                <i class="fa fa-refresh" aria-hidden="true"></i> Təmizlə
                             </a>
                         </div>
                         
@@ -47,6 +47,7 @@
                         </form>
 
                         <hr>
+                        @role('admin')
                         <div class="row top_tiles" style="margin: 10px 0;">
                             @php
                                 $totalAmount = $customerPayments->sum('amount');
@@ -76,6 +77,7 @@
                             </div>
                         </div>
                         <hr>
+                        @endrole
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>

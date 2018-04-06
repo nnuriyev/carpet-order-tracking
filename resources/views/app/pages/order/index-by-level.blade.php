@@ -23,20 +23,22 @@
                                         @endhasanyrole
 
                                         <th>Məhsul</th>
-                                        @hasanyrole('admin|workshop')
+                                        @hasanyrole($adminAndSales)
                                         <th>Çərçivə</th>
                                         <th>Çanta</th>
+                                        @endhasanyrole
+                                        @hasanyrole('admin|workshop')
                                         <th>Maya dəyəri</th>
                                         <th>Kargo (Emalatxana)</th>
                                         @endhasanyrole
 
-                                        @hasanyrole($adminAndSales)
+                                        @role('admin')
                                         <th>Qiymət</th>
                                         <th>Ödənilmış məbləğ</th>
                                         <th>Endirim məbləği</th>
                                         <th>Ödənilməli məbləğ</th>
+                                        @endrole
                                         <th>Status</th>
-                                        @endhasanyrole
 
                                         <th>Mərhələ</th>
                                         <th>Şəkil</th>
@@ -52,20 +54,23 @@
                                         @hasanyrole($adminAndSales)
                                         <td>{{ isset($item->customer) ? $item->customer->full_name : null }}</td>
                                         @endhasanyrole
+
                                         <td>{{ isset($item->product) ? $item->product->name : null }}</td>
+                                        @hasanyrole($adminAndSales)
                                         <td>{{ isset($item->frame) ? $item->frame->name : null }}</td>
                                         <td>{{ isset($item->case) ? $item->case->name : null }}</td>
+                                        @endhasanyrole
                                         @hasanyrole('admin|workshop')
                                         <td>{{ $item->product_cost }}</td>
                                         <td>{{ $item->cargo_cost }}</td>
                                         @endhasanyrole
-                                        @hasanyrole($adminAndSales)
+                                        @role('admin')
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
                                         <td>{{ $item->restOfAmount() }}</td>
+                                        @endrole
                                         <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
-                                        @endhasanyrole
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>
                                             @if(count($item->images)>0)

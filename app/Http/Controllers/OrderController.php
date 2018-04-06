@@ -101,7 +101,10 @@ class OrderController extends Controller
             $access = [2];
         }
 
-        $order = Order::where('status','!=', 2);
+        $order = Order::where([
+            ['status','!=', 2],
+            ['status','!=', 3],
+        ]);
 
         if($user->roles->first()->name == 'workshop'){
             $order = $order->whereHas('product', function ($query) use ($user){
@@ -349,7 +352,6 @@ class OrderController extends Controller
 
     public function attachOrderLevel(Request $request, $orderId)
     {
-    
         $order = Order::findOrFail($orderId);
         $order->last_order_level_id = $request->order_level_id;
         $order->save();
@@ -365,6 +367,8 @@ class OrderController extends Controller
         $user = Auth::user();
         if($level->key == 'tehvil_verildi'){
             $order->status = 2;//Sifarish tamamlandi
+        }elseif ($level->key == 'cancel'){
+            $order->status = 3;//Legv edilib
         }else{
             $order->status = 1;//Prosesde
         }
@@ -388,6 +392,10 @@ class OrderController extends Controller
                 $workshopDebt->debt = $debtAmount;
                 $workshopDebt->save();
             }
+        }
+
+        if($level->key == 'cancel'){
+            WorkshopDebt::where('order_id', $order->id)->delete();
         }
 
         return redirect('order/'. $order->id);

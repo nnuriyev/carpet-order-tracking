@@ -30,6 +30,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::resource('product', 'ProductController');
     Route::resource('customer', 'CustomerController');
     Route::resource('order', 'OrderController');
+    Route::resource('sale', 'SaleController');
     Route::resource('workshop-debt', 'WorkshopDebtController');
     Route::get('current-order', 'OrderController@currentOrders')->name('currentOrders');
     Route::get('order/invoice/{id}', 'OrderController@invoice')->name('orderInvoice');
@@ -50,9 +51,9 @@ Route::group(['middleware'=>'auth'], function (){
     Route::delete('order-image/{id}', 'OrderImageController@destroy');
 
     Route::get('/test', function (){
-        //$user = Auth::user();
+        $user = Auth::user();
         //$user->assignRole('admin');
-        //dd($user->getRoleNames());
+        dd($user->getRoleNames());
     });
 });
 

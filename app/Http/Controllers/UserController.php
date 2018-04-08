@@ -129,6 +129,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if(in_array($id, [1, 10, 11])) return "Bunlar test user-leridir. Silmek olmaz.";
+
         User::destroy($id);
 
         return redirect('user')->with('flash_message', 'User deleted!');

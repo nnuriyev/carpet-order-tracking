@@ -13,8 +13,8 @@ class Order extends Model
         'user_id', 'customer_id', 'product_id', 'frame_id',
         'case_id', 'product_cost', 'frame_cost', 'case_cost',
         'cargo_cost', 'price', 'paid_cash', 'paid_terminal',
-        'paid_online', 'discount_amount', 'status',
-        'last_order_level_id', 'image', 'sketch', 'note'
+        'paid_online', 'discount_amount', 'status','sale_id',
+        'last_order_level_id', 'wanted_date', 'note'
     ];
 
     public function cutomerPayments()
@@ -74,6 +74,11 @@ class Order extends Model
         return $this->belongsTo('App\Product', 'case_id');
     }
 
+    public function sale()
+    {
+        return $this->belongsTo('App\Sale', 'sale_id');
+    }
+
     public function orderLevels()
     {
         return $this->belongsToMany(
@@ -120,6 +125,16 @@ class Order extends Model
 
     public function statusName(){
         return config('staticData')['orderStatus'][$this->status];
+    }
+
+    public function getSketchConfirmDate(){
+        $level = $this->orderLevels->where('key', 'eskiz_tesdiq')->first();
+        return isset($level->pivot->created_at) ? $level->pivot->created_at : null;
+    }
+
+    public function getExitWorkshopDate(){
+        $level = $this->orderLevels->where('key', 'emalatxanadan_cixdi')->first();
+        return isset($level->pivot->due_date) ? $level->pivot->due_date : null;
     }
 
 }

@@ -13,6 +13,7 @@ use App\Product;
 use App\ProductCategory;
 use App\Uploader\FileUploader;
 use App\WorkshopDebt;
+use App\Sale;
 
 use App\User;
 use App\UserRole;
@@ -34,8 +35,8 @@ class OrderController extends Controller
     public function index(Request $request, Order $orders)
     {
         if($request->has('customer') && !is_null($request->customer)){
-            $orders = $orders->whereHas('user', function ($query) use ($request){
-                $query->where('users.name', 'like', '%' . $request->customer . '%');
+            $orders = $orders->whereHas('customer', function ($query) use ($request){
+                $query->where('customers.full_name', 'like', '%' . $request->customer . '%');
             });
         }
 
@@ -62,8 +63,11 @@ class OrderController extends Controller
         }
 
         if($request->has('order_level') && !is_null($request->order_level)){
-            $operator = $request->order_level == 1 ? '!=' : '=';
-            $orders = $orders->where('last_order_level_id', $operator, null);
+            $orders = $orders->where('last_order_level_id', $request->order_level);
+        }
+
+        if($request->has('sale_id') && !is_null($request->sale_id)){
+            $orders = $orders->where('sale_id', $request->sale_id);
         }
 
         if($request->has('date_from') && !is_null($request->date_from)){
@@ -82,8 +86,9 @@ class OrderController extends Controller
         }
 
         $orderLevels = OrderLevel::pluck('name', 'id');
+        $saleList = Sale::all()->pluck('name', 'id');
 
-        return view('app/pages.order.index', compact('orders','orderLevels'));
+        return view('app/pages.order.index', compact('orders','orderLevels', 'saleList'));
     }
 
     /**
@@ -165,9 +170,11 @@ class OrderController extends Controller
         });
         $casesList = $casesList->pluck('name', 'id');
 
+        $saleList = Sale::all()->pluck('name', 'id');
+
         return view('app/pages.order.create',
             compact('customerList', 'productList',
-                'frameList', 'casesList'));
+                'frameList', 'casesList', 'saleList'));
     }
 
     /**
@@ -298,9 +305,11 @@ class OrderController extends Controller
         });
         $casesList = $casesList->pluck('name', 'id');
 
+        $saleList = Sale::all()->pluck('name', 'id');
+
         return view('app/pages.order.edit', compact('order',
             'customerList', 'productList',
-            'frameList', 'casesList', 'orderLevels'));
+            'frameList', 'casesList', 'orderLevels', 'saleList'));
     }
 
     /**
@@ -396,6 +405,7 @@ class OrderController extends Controller
 
         if($level->key == 'cancel'){
             WorkshopDebt::where('order_id', $order->id)->delete();
+            CustomerPayment::where('order_id', $order->id)->delete();
         }
 
         return redirect('order/'. $order->id);

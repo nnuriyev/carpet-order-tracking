@@ -16,6 +16,8 @@ return [
     'customerType' => [
         0 => 'VIP', 
         1 => 'Standart',
+        2 => 'Real',
+        3 => 'Blok'
     ],
 
     'orderStatus' => [

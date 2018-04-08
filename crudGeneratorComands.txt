@@ -38,3 +38,13 @@ php artisan crud:view workshopDebt --fields="workshop_id#select#options=1,2; ord
 php artisan crud:controller OrderImageController --crud-name=orderImage --model-name=OrderImage --view-path="app/pages"
 php artisan crud:view orderImage --fields="order_id#select#options=1,2; image#file; type#select#options=1,2; status#select#options=1,2; note#text" --view-path="app/pages"
 ===========
+
+php artisan crud:controller SaleController --crud-name=sale --model-name=Sale --view-path="app/pages"
+php artisan crud:view sale --fields="name#string" --view-path="app/pages"
+===========
+
+
+
+migrate
+Nurlans-MacBook-Pro-2:order-tracking nurlan$ php artisan db:seed --class=CreateCancelOrderLevel
+Nurlans-MacBook-Pro-2:order-tracking nurlan$ php artisan db:seed --class=CreateCancelOrderLevelAccess

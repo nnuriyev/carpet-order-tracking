@@ -32,14 +32,15 @@
                                         <th>Kargo (Emalatxana)</th>
                                         @endhasanyrole
 
-                                        @role('admin')
+                                        @hasanyrole($adminAndSales)
                                         <th>Qiymət</th>
                                         <th>Ödənilmış məbləğ</th>
                                         <th>Endirim məbləği</th>
                                         <th>Ödənilməli məbləğ</th>
-                                        @endrole
-                                        <th>Status</th>
+                                        @endhasanyrole
 
+                                        <th>Arzuolunan tarix</th>
+                                        <th>Eskizin tesdiq tarixi</th>
                                         <th>Mərhələ</th>
                                         <th>Şəkil</th>
                                         <th>Eskiz</th>
@@ -64,13 +65,14 @@
                                         <td>{{ $item->product_cost }}</td>
                                         <td>{{ $item->cargo_cost }}</td>
                                         @endhasanyrole
-                                        @role('admin')
+                                        @hasanyrole($adminAndSales)
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->totalPaidAmount() }}</td>
                                         <td>{{ $item->discount_amount }}</td>
                                         <td>{{ $item->restOfAmount() }}</td>
-                                        @endrole
-                                        <td>{{ config('staticData')['orderStatus'][$item->status] }}</td>
+                                        @endhasanyrole
+                                        <td>{{  $item->wanted_date != null ? date('d-m-Y', strtotime($item->wanted_date)): null }}</td>
+                                        <td>{{  $item->getSketchConfirmDate() != null ? date('d-m-Y', strtotime($item->getSketchConfirmDate())): null }}</td>
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>
                                             @if(count($item->images)>0)
@@ -90,13 +92,13 @@
                                             <a href="{{ url('/order/' . $item->id) }}" title="View order"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/order/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
-                                            @hasanyrole($adminAndSales)
+                                            {{-- @hasanyrole($adminAndSales)
                                             <form method="POST" action="{{ url('/order' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-xs" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
-                                            @endhasanyrole
+                                            @endhasanyrole --}}
                                         </td>
                                     </tr>
                                     @endif

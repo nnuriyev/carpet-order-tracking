@@ -106,6 +106,27 @@
 </div>
 @endif--}}
 
+<div class="form-group {{ $errors->has('sale_id') ? 'has-error' : ''}}">
+    <label for="sale_id" class="col-md-4 control-label">{{ 'Kampaniya' }}</label>
+    <div class="col-md-6">
+        <select name="sale_id" class="form-control js-example-basic-single" id="sale_id">
+                <option value="">Yoxdur</option>
+            @foreach ($saleList as $optionKey => $optionValue)
+                <option value="{{ $optionKey }}" {{ (isset($order->sale_id) && $order->sale_id == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('sale_id', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group {{ $errors->has('wanted_date') ? 'has-error' : ''}}">
+    <label for="wanted_date" class="col-md-4 control-label">{{ 'Arzuolunan tarix' }}</label>
+    <div class="col-md-6">
+        <input class="form-control" name="wanted_date" type="date" id="wanted_date"
+               value="{{ $order->wanted_date or null}}">
+        {!! $errors->first('wanted_date', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 <div class="form-group {{ $errors->has('note') ? 'has-error' : ''}}">
     <label for="note" class="col-md-4 control-label">{{ 'Qeyd' }}</label>
     <div class="col-md-6">

@@ -173,7 +173,7 @@ $adminAndSales = 'admin|sales';
                                         <td>{{ $item->name }}</td>
                                         <td>{{ date('d-m-Y h:i', strtotime($item->pivot->created_at)) }}</td>
                                         <td>{{ $item->pivot->due_date != null ? date('d-m-Y', strtotime($item->pivot->due_date)):null }}</td>
-                                        <td>{{ $item->pivot->note }}</td>
+                                        <td>{{ Auth::user()->hasRole('sales') && $item->key == 'emalatxanadan_cixdi'? '' : $item->pivot->note  }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

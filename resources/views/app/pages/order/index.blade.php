@@ -69,6 +69,15 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-2">
+                                    <label for="sale_id" class="col-md-12 control-label">Kampaniya.</label>
+                                    <select class="form-control" name="sale_id">
+                                        <option value="">Seçim edin</option>
+                                        @foreach ($saleList as $optionKey => $optionValue)
+                                            <option value="{{ $optionKey }}" {{ request('sale_id') == $optionKey  ? 'selected' : ''}}>{{ $optionValue }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-md-3">
                                     <label class="control-label">Tarix(Başlanğıc)</label>
                                     <input class="form-control" name="date_from" type="date" value="{{request('date_from')}}">
@@ -103,7 +112,7 @@
 
                                     @hasanyrole('admin|workshop')
                                     <th>Maya dəyəri</th>
-                                    <th>Kargo (Emalatxana)</th>
+                                    {{-- <th>Kargo (Emalatxana)</th> --}}
                                     @endhasanyrole
 
                                     @hasanyrole($adminAndSales)
@@ -114,6 +123,8 @@
                                     <th>Status</th>
                                     @endhasanyrole
 
+                                    <th>Kampaniya</th>
+                                    <th>Arzuolunan tarix</th>
                                     <th>Mərhələ</th>
                                     <th>Tarix</th>
 
@@ -135,7 +146,7 @@
                                         <td>{{ isset($item->case) ? $item->case->name : null }}</td>
                                         @hasanyrole('admin|workshop')
                                         <td>{{ $item->product_cost }}</td>
-                                        <td>{{ $item->cargo_cost }}</td>
+                                        {{-- <td>{{ $item->cargo_cost }}</td> --}}
                                         @endhasanyrole
                                         @hasanyrole($adminAndSales)
                                         <td>{{ $item->price }}</td>
@@ -144,6 +155,8 @@
                                         <td>{{ $item->restOfAmount() }}</td>
                                         <td class="{{$item->status == 3 ? 'red':''}}">{{ config('staticData')['orderStatus'][$item->status] }}</td>
                                         @endhasanyrole
+                                        <td>{{ isset($item->sale) ? $item->sale->name : null }}</td>
+                                        <td>{{ $item->wanted_date != null ? date('d-m-Y', strtotime($item->wanted_date)): null }}</td>
                                         <td>{{ isset($item->lastOrderlevel)?$item->lastOrderlevel->name: null }}</td>
                                         <td>{{ date('d-m-Y h:i', strtotime($item->created_at)) }}</td>
                                         <td>
@@ -158,7 +171,7 @@
                                                 </button>
                                             </a>
 
-                                            @hasanyrole($adminAndSales)
+                                           {{--  @hasanyrole($adminAndSales)
                                             <form method="POST" action="{{ url('/order' . '/' . $item->id) }}"
                                                   accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
@@ -168,7 +181,7 @@
                                                             class="fa fa-trash-o" aria-hidden="true"></i> Delete
                                                 </button>
                                             </form>
-                                            @endhasanyrole
+                                            @endhasanyrole --}}
                                         </td>
                                     </tr>
                                 @endforeach

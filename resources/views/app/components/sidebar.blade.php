@@ -18,6 +18,9 @@
                 <a href="{{route('customer.index')}}"><i class="fa fa-users"></i> Müştərilər</a>
             </li>
             <li>
+                <a href="{{route('sale.index')}}"><i class="fa fa-bookmark"></i>Kampaniyalar</a>
+            </li>
+            <li>
                 <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i>Bütün sifarişlər</a>
             </li>
             <li>
@@ -39,6 +42,9 @@
             </li>
             <li>
                 <a href="{{route('customer.index')}}"><i class="fa fa-users"></i> Müştərilər</a>
+            </li>
+            <li>
+                <a href="{{route('sale.index')}}"><i class="fa fa-bookmark"></i>Kampaniyalar</a>
             </li>
             <li>
                 <a href="{{route('order.index')}}"><i class="fa fa-cart-arrow-down"></i>Bütün sifarişlər</a>

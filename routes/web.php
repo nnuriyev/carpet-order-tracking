@@ -52,11 +52,14 @@ Route::group(['middleware'=>'auth'], function (){
 
     Route::get('notification-read/{id}', 'UserController@notificationRead')->name('notificationRead');
 
-    Route::get('/test', function (){
+    Route::get('orders-export', 'OrderController@export');
+    Route::get('customer-payments-export', 'CustomerPaymentController@export');
+
+    /* Route::get('/test', function (){
         $user = Auth::user();
         //$user->assignRole('admin');
         dd($user->getRoleNames());
-    });
+    }); */
 });
 
 

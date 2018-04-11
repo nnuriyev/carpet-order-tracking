@@ -15,6 +15,9 @@
                         <a href="{{ url('/order/create') }}" class="btn btn-success btn-xs" title="Add New order">
                             <i class="fa fa-plus" aria-hidden="true"></i> Yeni sifariş
                         </a>
+                        <a href="{{ url('/orders-export?'. request()->getQueryString()) }}" class="btn btn-success btn-xs pull-right" title="Add New order">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel to export
+                        </a>
                         @endhasanyrole
                     </div>
                     <div class="panel-body">

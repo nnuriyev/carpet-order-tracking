@@ -18,6 +18,9 @@ use Spatie\Permission\Models\Role;
 
 use App\Notifications\OrderLevelNotf;
 
+use Maatwebsite\Excel\Excel;
+use App\Exports\OrdersExport;
+
 use App\User;
 use App\UserRole;
 use Carbon\Carbon;
@@ -520,6 +523,63 @@ class OrderController extends Controller
         CustomerPayment::destroy($id);
         return redirect()->back();
     }*/
+
+
+    public function export(Request $request, Order $orders, Excel $excel) 
+    {
+        
+        if($request->has('customer') && !is_null($request->customer)){
+            $orders = $orders->whereHas('customer', function ($query) use ($request){
+                $query->where('customers.full_name', 'like', '%' . $request->customer . '%');
+            });
+        }
+
+        if($request->has('product') && !is_null($request->product)){
+            $orders = $orders->whereHas('product', function ($query) use ($request){
+                $query->where('products.name', 'like', '%' . $request->product . '%')
+                ->orWhere('products.code', '=', $request->product );
+            });
+        }
+
+        if($request->has('frame') && !is_null($request->frame)){
+            $operator = $request->frame == 1 ? '!=' : '=';
+            $orders = $orders->where('frame_id', $operator, null);
+        }
+
+        if($request->has('case') && !is_null($request->case)){
+            $operator = $request->case == 1 ? '!=' : '=';
+            $orders = $orders->where('case_id', $operator, null);
+        }
+
+        if($request->has('sketch') && !is_null($request->sketch)){
+            $operator = $request->sketch == 1 ? '!=' : '=';
+            $orders = $orders->where('sketch', $operator, null);
+        }
+
+        if($request->has('order_level') && !is_null($request->order_level)){
+            $orders = $orders->where('last_order_level_id', $request->order_level);
+        }
+
+        if($request->has('sale_id') && !is_null($request->sale_id)){
+            $orders = $orders->where('sale_id', $request->sale_id);
+        }
+
+        if($request->has('date_from') && !is_null($request->date_from)){
+            $orders = $orders->where('created_at','>=', $request->date_from);
+        }
+
+        if($request->has('date_to') && !is_null($request->date_to)){
+            $orders = $orders->where('created_at','<=', $request->date_to . ' 23:59:59');
+        }
+
+        
+        $orders = $orders->orderBy('id', 'desc')->get();
+
+
+        $export = new OrdersExport($orders);
+        return $excel->download($export, 'orders.xlsx');
+    }
+
 
 
 }

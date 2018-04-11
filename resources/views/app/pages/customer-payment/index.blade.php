@@ -7,6 +7,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Maliyyə hesabatı
+                        <a href="{{ url('/customer-payments-export?'. request()->getQueryString()) }}" class="btn btn-success btn-xs pull-right" title="Add New order">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel to export
+                        </a>
                     </div>
                     <div class="panel-body">
 

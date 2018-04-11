@@ -50,6 +50,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::patch('order-image/{id}', 'OrderImageController@update');
     Route::delete('order-image/{id}', 'OrderImageController@destroy');
 
+    Route::get('notification-read/{id}', 'UserController@notificationRead')->name('notificationRead');
+
     Route::get('/test', function (){
         $user = Auth::user();
         //$user->assignRole('admin');

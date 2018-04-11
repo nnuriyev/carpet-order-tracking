@@ -40,6 +40,27 @@ return [
         6 => 'Ofisdaxili',
         7 => 'Paypal',
         8 => 'Digər'
+    ],
+
+
+    /* 'emalatxanaya_gonder', 'eskizde_duzelish', 'eskiz_hazirdir', 
+    'eskiz_tesdiq', 'toxuma_prosesi', 'emalatxanadan_cixdi', 
+    'esas_ofise_catdi', 'chercive_ucun_gonderildi', 'chercive_hazirdir',
+    'tehvile_hazir', 'tehvil_verildi', 'cancel' */
+
+    'orderLevelNotifAccess' => [
+        'admin' => [
+            'emalatxanaya_gonder', 'toxuma_prosesi', 
+            'emalatxanadan_cixdi', 'tehvil_verildi', 'cancel'
+        ],
+        'sales'=> [
+            'eskiz_hazirdir', 'toxuma_prosesi', 
+            'emalatxanadan_cixdi'
+        ],
+        'workshop'=>[
+            'emalatxanaya_gonder', 'eskizde_duzelish', 
+            'eskiz_tesdiq'
+        ]
     ]
 
 ];

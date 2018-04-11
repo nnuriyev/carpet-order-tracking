@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -134,5 +135,14 @@ class UserController extends Controller
         User::destroy($id);
 
         return redirect('user')->with('flash_message', 'User deleted!');
+    }
+
+
+    public function notificationRead($id){
+        $notification = Auth::user()->unreadNotifications()->findOrFail($id);
+        $orderId = $notification->data['order_id'];
+        $notification->markAsRead();
+        
+        return redirect('/order/' . $orderId);
     }
 }

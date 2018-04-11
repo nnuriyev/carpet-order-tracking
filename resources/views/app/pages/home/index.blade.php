@@ -74,3 +74,11 @@ $adminAndSales = 'admin|sales';
 </div>
 @endhasanyrole
 @endsection
+
+@section('page-scripts')
+<script>
+    setInterval(function(){
+        window.location.reload();
+    }, 60000);
+</script>
+@endsection

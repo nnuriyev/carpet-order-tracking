@@ -34,4 +34,22 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\ProductCategory', 'product_category_id');
     }
+
+
+    public function getUnreadNotification(){
+       
+        $unreadNotifications = collect();
+        foreach($this->unreadNotifications as $notification){
+            $data = $notification->data;
+            
+            $unreadNotifications->push([
+                'order' => Order::find($data['order_id']),
+                'orderLevel' => OrderLevel::find($data['order_level_id']),
+                'user' => User::find($data['user_id']),
+                'notification' => $notification
+            ]);
+        }
+
+        return $unreadNotifications;
+    }
 }

@@ -21,6 +21,33 @@
                         </li>
                     </ul>
                 </li>
+                @php($notifications = Auth::user()->getUnreadNotification())
+                <li role="presentation" class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        @if($notifications->count() > 0)
+                        <span class="badge bg-green">{{$notifications->count()}}</span>
+                        @endif
+                    </a>
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        @foreach($notifications as $notif)
+                        <li>
+                        <a href="{{route('notificationRead', $notif['notification']->id)}}">
+                            <span class="image"><img src="{{Storage::url($notif['order']->getImage())}}"></span>
+                            <span>
+                                <span>{{$notif['user']->name}}</span>
+                                <span class="time">{{ date('d-m-Y h:i', strtotime($notif['notification']->created_at)) }}</span>
+                            </span>
+                            <span class="message">
+                                ID-si <b>{{$notif['order']->id }}</b> olan sifariş 
+                                <b>{{$notif['orderLevel']->name}}</b> mərhələsindədir.
+                            </span>
+                        </a>
+                        </li>
+                        @endforeach
+                        
+                    </ul>
+                </li>
             </ul>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

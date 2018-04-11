@@ -42,9 +42,3 @@ php artisan crud:view orderImage --fields="order_id#select#options=1,2; image#fi
 php artisan crud:controller SaleController --crud-name=sale --model-name=Sale --view-path="app/pages"
 php artisan crud:view sale --fields="name#string" --view-path="app/pages"
 ===========
-
-
-
-migrate
-Nurlans-MacBook-Pro-2:order-tracking nurlan$ php artisan db:seed --class=CreateCancelOrderLevel
-Nurlans-MacBook-Pro-2:order-tracking nurlan$ php artisan db:seed --class=CreateCancelOrderLevelAccess

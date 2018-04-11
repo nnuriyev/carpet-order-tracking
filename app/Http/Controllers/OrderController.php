@@ -14,6 +14,9 @@ use App\ProductCategory;
 use App\Uploader\FileUploader;
 use App\WorkshopDebt;
 use App\Sale;
+use Spatie\Permission\Models\Role;
+
+use App\Notifications\OrderLevelNotf;
 
 use App\User;
 use App\UserRole;
@@ -23,6 +26,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 
 
 class OrderController extends Controller
@@ -408,7 +412,38 @@ class OrderController extends Controller
             CustomerPayment::where('order_id', $order->id)->delete();
         }
 
+        $notificationData = (object) [
+            'order_id'=>$order->id,
+            'order_level_id'=>$request->order_level_id,
+            'user_id'=>$user->id
+        ];
+
+        $notifiableUsers = $this->getNotifiableUsers($order);
+        Notification::send($notifiableUsers, new OrderLevelNotf($notificationData));
+
         return redirect('order/'. $order->id);
+    }
+
+
+    protected function getNotifiableUsers($order){
+
+        $notifiableUsers = collect();
+        $notifiableAccess = config('staticData')['orderLevelNotifAccess'];
+        foreach($notifiableAccess as $role => $levels){
+            $users = Role::where('name', $role)->first()->users;
+
+            $filteredUsers = $users->reject(function ($user, $key) use ($role, $order) {
+                if($role == 'workshop' && $user->productCategory->id != $order->product->category->id){
+                    return true;
+                }
+            });
+
+             if(in_array($order->lastOrderLevel->key, $notifiableAccess[$role])){
+                $notifiableUsers = $notifiableUsers->merge($filteredUsers);
+             }
+        }
+
+        return $notifiableUsers;
     }
 
 

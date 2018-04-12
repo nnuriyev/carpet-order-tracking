@@ -54,6 +54,10 @@ Route::group(['middleware'=>'auth'], function (){
 
     Route::get('orders-export', 'OrderController@export');
     Route::get('customer-payments-export', 'CustomerPaymentController@export');
+    Route::get('workshop-debt-export', 'WorkshopDebtController@export');
+    Route::get('general-cost-export', 'GeneralCostController@export');
+    Route::get('customer-export', 'CustomerController@export');
+    Route::get('product-export', 'ProductController@export');
 
     /* Route::get('/test', function (){
         $user = Auth::user();

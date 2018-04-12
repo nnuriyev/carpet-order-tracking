@@ -5,7 +5,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Product</div>
+                    <div class="panel-heading">Product
+                        <a href="{{ url('/product-export?'. request()->getQueryString()) }}" class="btn btn-success btn-xs pull-right">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel to export
+                        </a>
+                    </div>
                     <div class="panel-body">
                         @role('admin')
                         <a href="{{ url('/product/create') }}" class="btn btn-success btn-sm" title="Add New product">

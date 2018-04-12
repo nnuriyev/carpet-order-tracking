@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\CustomerPayment;
 
 use Maatwebsite\Excel\Excel;
-use App\Exports\CustomerPayments;
+use App\Exports\CustomerPaymentExport;
 
 class CustomerPaymentController extends Controller
 {
@@ -59,7 +59,7 @@ class CustomerPaymentController extends Controller
 
         $customerPayments = $customerPayments->orderBy('id', 'desc')->get();
 
-        $export = new CustomerPayments($customerPayments);
+        $export = new CustomerPaymentExport($customerPayments);
         return $excel->download($export, 'Customer-Payments.xlsx');
     }
 }

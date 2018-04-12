@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Maatwebsite\Excel\Excel;
+use App\Exports\GeneralCostsExport;
+
 use App\GeneralCost;
 use Illuminate\Http\Request;
 
@@ -127,4 +130,26 @@ class GeneralCostController extends Controller
 
         return redirect('general-cost')->with('flash_message', 'GeneralCost deleted!');
     }
+
+
+    public function export(Request $request, GeneralCost $generalcost, Excel $excel)
+    {
+        if($request->has('type') && !is_null($request->type)){
+            $generalcost = $generalcost->where('type', $request->type);
+        }
+
+        if($request->has('date_from') && !is_null($request->date_from)){
+            $generalcost = $generalcost->where('created_at','>=', $request->date_from);
+        }
+
+        if($request->has('date_to') && !is_null($request->date_to)){
+            $generalcost = $generalcost->where('created_at','<=', $request->date_to . ' 23:59:59');
+        }
+
+        $generalcost = $generalcost->orderBy('id', 'desc')->get();
+
+        $export = new GeneralCostsExport($generalcost);
+        return $excel->download($export, 'General-Costs.xlsx');
+    }
+
 }

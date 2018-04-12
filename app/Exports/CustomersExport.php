@@ -6,7 +6,7 @@ namespace App\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class CustomerPayments implements FromView
+class CustomersExport implements FromView
 {
 
     protected $data;
@@ -18,8 +18,8 @@ class CustomerPayments implements FromView
 
     public function view(): View
     {
-        return view('app.pages.customer-payment.export', [
-            'customerPayments' => $this->data
+        return view('app.pages.customer.export', [
+            'customer' => $this->data
         ]);
     }
     

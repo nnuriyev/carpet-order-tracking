@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Maatwebsite\Excel\Excel;
+use App\Exports\WorkshopDebtExport;
+
 use App\WorkshopDebt;
 use Illuminate\Http\Request;
 use App\User;
@@ -89,7 +92,7 @@ class WorkshopDebtController extends Controller
     {
         
         $requestData = $request->all();
-        
+
         WorkshopDebt::create($requestData);
 
         return redirect('workshop-debt')->with('flash_message', 'WorkshopDebt added!');
@@ -157,5 +160,42 @@ class WorkshopDebtController extends Controller
         WorkshopDebt::destroy($id);
 
         return redirect('workshop-debt')->with('flash_message', 'WorkshopDebt deleted!');
+    }
+
+    public function export(Request $request, WorkshopDebt $workshopdebt, Excel $excel)
+    {
+        $user = Auth::user();
+        $role = $user->roles()->first()->name;
+
+        if($role == 'admin' && $request->has('workshop_id') && !is_null($request->workshop_id)){
+            $workshopdebt = $workshopdebt->where('workshop_id', $request->workshop_id);
+        }
+
+        if($role == 'admin' && $request->has('order_id') && !is_null($request->order_id)){
+            $workshopdebt = $workshopdebt->where('order_id', $request->order_id);
+        }
+
+        if($request->has('type') && !is_null($request->type)){
+            $columnName = $request->type == 1 ? 'paid' : 'debt';
+            $workshopdebt = $workshopdebt->where($columnName, '!=' , null);
+        }
+
+        if($request->has('date_from') && !is_null($request->date_from)){
+            $workshopdebt = $workshopdebt->where('created_at','>=', $request->date_from);
+        }
+
+        if($request->has('date_to') && !is_null($request->date_to)){
+            $workshopdebt = $workshopdebt->where('created_at','<=', $request->date_to . ' 23:59:59');
+        }
+
+        if($role == 'admin' ){
+            $workshopdebt = $workshopdebt->orderBy('id', 'desc')->get();
+        }else{
+            $workshopdebt = $workshopdebt->where('workshop_id', $user->id)
+                ->orderBy('id', 'desc')->get();
+        }
+
+        $export = new WorkshopDebtExport($workshopdebt);
+        return $excel->download($export, 'Workshop-debt.xlsx');
     }
 }

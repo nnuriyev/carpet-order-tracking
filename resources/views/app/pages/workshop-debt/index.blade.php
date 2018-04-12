@@ -12,6 +12,9 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Yeni ödəniş
                         </a>
                         @endrole
+                        <a href="{{ url('/workshop-debt-export?'. request()->getQueryString()) }}" class="btn btn-success btn-xs pull-right">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel to export
+                        </a>
                     </div>
                     <div class="panel-body">
 

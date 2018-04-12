@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Maatwebsite\Excel\Excel;
+use App\Exports\ProductExport;
+
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
@@ -18,15 +21,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $product = Product::paginate($perPage);
-        } else {
-            $product = Product::paginate($perPage);
-        }
-
+        $perPage = 50;
+        $product = Product::paginate($perPage);
         return view('app/pages.product.index', compact('product'));
     }
 
@@ -119,4 +115,12 @@ class ProductController extends Controller
 
         return redirect('product')->with('flash_message', 'Product deleted!');
     }
+
+    public function export(Excel $excel)
+    {
+        $product = Product::orderBy('id', 'desc')->get();
+        $export = new ProductExport($product);
+        return $excel->download($export, 'Products.xlsx');
+    }
+
 }

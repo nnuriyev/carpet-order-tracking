@@ -577,7 +577,7 @@ class OrderController extends Controller
 
 
         $export = new OrdersExport($orders);
-        return $excel->download($export, 'orders.xlsx');
+        return $excel->download($export, 'Orders.xlsx');
     }
 
 

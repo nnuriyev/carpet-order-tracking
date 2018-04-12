@@ -5,9 +5,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Customer <a href="{{ url('/customer/create') }}" class="btn btn-success btn-xs" title="Add New customer">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                    </a></div>
+                    <div class="panel-heading">Customer
+                        <a href="{{ url('/customer/create') }}" class="btn btn-success btn-xs" title="Add New customer">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                        </a>
+                        <a href="{{ url('/customer-export?'. request()->getQueryString()) }}" class="btn btn-success btn-xs pull-right">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel to export
+                        </a>
+                    </div>
                     <div class="panel-body">
                         
                         <div class="col-md-1">

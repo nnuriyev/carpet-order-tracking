@@ -10,6 +10,9 @@
                         <a href="{{ url('/general-cost/create') }}" class="btn btn-success btn-xs" title="Add New generalCost">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
+                        <a href="{{ url('/general-cost-export?'. request()->getQueryString()) }}" class="btn btn-success btn-xs pull-right">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel to export
+                        </a>
                     </div>
                     <div class="panel-body">
                         <div class="col-md-1">

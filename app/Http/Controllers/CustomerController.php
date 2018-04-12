@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Maatwebsite\Excel\Excel;
+use App\Exports\CustomersExport;
+
 use App\Customer;
 use Illuminate\Http\Request;
 
@@ -17,8 +20,6 @@ class CustomerController extends Controller
      */
     public function index(Request $request, Customer $customer)
     {
-        //'like', '%' . $request->product . '%'
-
         if($request->has('full_name') && !is_null($request->full_name)){
             $customer = $customer->where('full_name', 'like', '%' . $request->full_name . '%');
         }
@@ -140,4 +141,37 @@ class CustomerController extends Controller
 
         return redirect('customer')->with('flash_message', 'Customer deleted!');
     }
+
+    public function export(Request $request, Customer $customer, Excel $excel)
+    {
+        if($request->has('full_name') && !is_null($request->full_name)){
+            $customer = $customer->where('full_name', 'like', '%' . $request->full_name . '%');
+        }
+
+        if($request->has('email') && !is_null($request->email)){
+            $customer = $customer->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        if($request->has('phone') && !is_null($request->phone)){
+            $customer = $customer->where('phone', 'like', '%' . $request->phone . '%');
+        }
+
+        if($request->has('gender') && !is_null($request->gender)){
+            $customer = $customer->where('gender', '=', $request->gender);
+        }
+
+        if($request->has('type') && !is_null($request->type)){
+            $customer = $customer->where('type', '=', $request->type);
+        }
+
+        if($request->has('status') && !is_null($request->status)){
+            $customer = $customer->where('status', '=', $request->status);
+        }
+
+        $customer = $customer->orderBy('id', 'desc')->get();
+
+        $export = new CustomersExport($customer);
+        return $excel->download($export, 'Customers.xlsx');
+    }
+
 }

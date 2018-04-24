@@ -436,7 +436,9 @@ class OrderController extends Controller
             $users = Role::where('name', $role)->first()->users;
 
             $filteredUsers = $users->reject(function ($user, $key) use ($role, $order) {
-                if($role == 'workshop' && $user->productCategory->id != $order->product->category->id){
+                if($role == 'workshop'
+                    && isset($user->productCategory->id)
+                    && $user->productCategory->id != $order->product->category->id){
                     return true;
                 }
             });

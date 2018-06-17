@@ -34,7 +34,7 @@
                         {{dump($notif['order'])}}
                         <li>
                         <a href="{{route('notificationRead', $notif['notification']->id)}}">
-                            <span class="image"><img src="{{Storage::url($notif['order']->getImage())}}"></span>
+                            <span class="image">{{-- <img src="{{Storage::url($notif['order']->getImage())}}"> --}}</span>
                             <span>
                                 <span>{{$notif['user']->name}}</span>
                                 <span class="time">{{ date('d-m-Y h:i', strtotime($notif['notification']->created_at)) }}</span>

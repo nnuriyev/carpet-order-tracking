@@ -31,21 +31,19 @@
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                         @foreach($notifications as $notif)
-                            @if(isset($notif['order']))
-                            <li>
-                            <a href="{{route('notificationRead', $notif['notification']->id)}}">
-                                <span class="image">{{-- <img src="{{Storage::url($notif['order']->getImage())}}"> --}}</span>
-                                <span>
-                                    <span>{{$notif['user']->name}}</span>
-                                    <span class="time">{{ date('d-m-Y h:i', strtotime($notif['notification']->created_at)) }}</span>
-                                </span>
-                                <span class="message">
-                                    ID-si <b>{{$notif['order']->id }}</b> olan sifariş 
-                                    <b>{{$notif['orderLevel']->name}}</b> mərhələsindədir.
-                                </span>
-                            </a>
-                            </li>
-                            @endif
+                        <li>
+                        <a href="{{route('notificationRead', $notif['notification']->id)}}">
+                            <span class="image"><img src="{{Storage::url($notif['order']->getImage())}}"></span>
+                            <span>
+                                <span>{{$notif['user']->name}}</span>
+                                <span class="time">{{ date('d-m-Y h:i', strtotime($notif['notification']->created_at)) }}</span>
+                            </span>
+                            <span class="message">
+                                ID-si <b>{{$notif['order']->id }}</b> olan sifariş 
+                                <b>{{$notif['orderLevel']->name}}</b> mərhələsindədir.
+                            </span>
+                        </a>
+                        </li>
                         @endforeach
                         
                     </ul>

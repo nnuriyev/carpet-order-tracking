@@ -31,7 +31,7 @@
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                         @foreach($notifications as $notif)
-                        {{dump($notif['order']}}
+                        {{dump($notif['order'])}}
                         <li>
                         <a href="{{route('notificationRead', $notif['notification']->id)}}">
                             <span class="image"><img src="{{Storage::url($notif['order']->getImage())}}"></span>

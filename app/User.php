@@ -42,12 +42,18 @@ class User extends Authenticatable
         foreach($this->unreadNotifications as $notification){
             $data = $notification->data;
             
-            $unreadNotifications->push([
+            $notificationData = [
                 'order' => Order::find($data['order_id']),
                 'orderLevel' => OrderLevel::find($data['order_level_id']),
                 'user' => User::find($data['user_id']),
                 'notification' => $notification
-            ]);
+            ];
+
+            if(is_null($notificationData['order']) ||  is_null($notificationData['orderLevel'])){
+                $notification->delete();
+            }else{
+                $unreadNotifications->push($notificationData);
+            } 
         }
 
         return $unreadNotifications;

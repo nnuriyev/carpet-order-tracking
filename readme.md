@@ -1,3 +1,7 @@
+## Carpet Order Tracking
+
+This is an order tracker project for the carpet seller company.
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
